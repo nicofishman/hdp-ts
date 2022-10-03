@@ -6,7 +6,8 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "standard"
+        "standard",
+        "plugin:tailwindcss/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -28,6 +29,7 @@
         "react/react-in-jsx-scope": "off",
         "semi": ["error", "always"],
         "indent": ["error", 4],
+        "tailwindcss/classnames-order": "warn",
         "tailwindcss/enforces-shorthand": "warn",
         "tailwindcss/no-contradicting-classname": "warn",
         "@typescript-eslint/no-unused-vars": [
@@ -67,6 +69,9 @@
     "settings": {
         "react": {
             "version": "detect"
+        },
+        "tailwindcss": {
+            "callees": ["classnames", "clsx"]
         }
     }
 }

@@ -5,13 +5,41 @@ import {
     RouterProvider
 } from 'react-router-dom';
 
-import App from './App';
 import './index.css';
+import Cards from './pages/Cards';
+import Index from './pages/Index';
+import Layout from './pages/layout/Layout';
+import Home from './pages/menu/Home';
+import Settings from './pages/menu/Settings';
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <App />
+        element: (
+            <div className=''>
+                <Layout />
+            </div>
+        ),
+        children: [
+            {
+                path: '/cards',
+                element: <Cards />
+            },
+            {
+                path: '/',
+                element: <Index />,
+                children: [
+                    {
+                        path: '/',
+                        element: <Home />
+                    },
+                    {
+                        path: 'settings',
+                        element: <Settings />
+                    }
+                ]
+            }
+        ]
     }
 ]);
 

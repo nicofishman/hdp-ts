@@ -1,3 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.shadow-my-card {
+    @apply shadow-theme-card dark:shadow-dark-card
+}
+
+.bg-main {
+    @apply bg-white dark:bg-negrito dark:text-white
+}
+
+.main-card {
+    @apply min-h-[5rem] min-w-[5rem] bg-main text-4xl font-main font-medium rounded-md shadow-my-card border-[1px] border-black dark:border-[#666]
+}
