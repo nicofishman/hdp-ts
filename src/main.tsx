@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {
@@ -12,11 +13,14 @@ import Layout from './pages/layout/Layout';
 import Home from './pages/menu/Home';
 import Settings from './pages/menu/Settings';
 
+const isDark = window.localStorage.getItem('theme') === 'dark';
+
 const router = createBrowserRouter([
     {
         path: '/',
         element: (
-            <div className=''>
+            // eslint-disable-next-line tailwindcss/no-custom-classname
+            <div className={clsx('layout', isDark && 'dark')}>
                 <Layout />
             </div>
         ),
