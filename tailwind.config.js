@@ -17,7 +17,7 @@ module.exports = {
             },
             boxShadow: {
                 'theme-card': '0.2em 0.2em 0.3em #333',
-                'dark-card': '0.2em 0.2em 0.3em #666'
+                'dark-card': '0.1em 0.1em 0.3em #888'
             },
             backgroundColor: {
                 negrito: '#121212'

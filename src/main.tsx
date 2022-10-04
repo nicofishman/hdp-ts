@@ -16,6 +16,8 @@ import Account from './pages/menu/Account';
 import Home from './pages/menu/Home';
 import Settings from './pages/menu/Settings';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 const isDark = window.localStorage.getItem('theme') === 'dark';
 
 const router = createBrowserRouter([
