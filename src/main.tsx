@@ -6,6 +6,7 @@ import {
     Outlet,
     RouterProvider
 } from 'react-router-dom';
+import { I18nextProvider } from 'react-i18next';
 
 import AuthProvider from './context/AuthContext';
 import './index.css';
@@ -15,8 +16,8 @@ import Layout from './pages/layout/Layout';
 import Account from './pages/menu/Account';
 import Home from './pages/menu/Home';
 import Settings from './pages/menu/Settings';
-
 import 'react-toastify/dist/ReactToastify.css';
+import i18n from './lang/i18n';
 
 const isDark = window.localStorage.getItem('theme') === 'dark';
 
@@ -70,6 +71,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <I18nextProvider i18n={i18n}>
+            <RouterProvider router={router} />
+        </I18nextProvider>
     </React.StrictMode>
 );

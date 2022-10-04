@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { AiOutlineGoogle, AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
 import Button from '../../components/common/Button';
@@ -12,6 +13,7 @@ interface LogInProps {
 const LogIn: FC<LogInProps> = () => {
     const [passwordVisible, setPasswordVisible] = useState(true);
     const { signInWithGoogle } = useAuthContext();
+    const { t } = useTranslation('global');
 
     return (
         <div className='flex w-full select-none flex-col items-center'>
@@ -21,7 +23,7 @@ const LogIn: FC<LogInProps> = () => {
             <h1 className='py-3 text-2xl font-bold'>— OR —</h1>
             <div className='flex w-full flex-col gap-4'>
 
-                <Input className='h-14 w-full' placeholder='Email' />
+                <Input className='h-14 w-full' placeholder={t('email')} />
                 <Input className='h-14 w-full' endDecorator={
                     passwordVisible
                         ? (
@@ -30,8 +32,8 @@ const LogIn: FC<LogInProps> = () => {
                         : (
                             <AiFillEyeInvisible className='h-full w-full fill-black dark:fill-gray-300' onClick={() => setPasswordVisible(!passwordVisible)} />
                         )
-                } placeholder='Password' type={passwordVisible ? 'text' : 'password'} />
-                <Button className='h-14 w-full' text='Log In' />
+                } placeholder={t('password')} type={passwordVisible ? 'text' : 'password'} />
+                <Button className='h-14 w-full' text={t('login')} />
             </div>
         </div>
     );

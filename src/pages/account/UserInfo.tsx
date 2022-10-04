@@ -1,5 +1,6 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useRef, useState } from 'react';
 import { IoMdSend } from 'react-icons/io';
+import { MdModeEditOutline } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
 import Button from '../../components/common/Button';
@@ -20,7 +21,9 @@ const UserInfo: FC<UserInfoProps> = () => {
         toast('Name changed successfully', {
             type: 'success',
             containerId: 'A',
-            theme: 'colored'
+            theme: 'colored',
+            icon: () => (<MdModeEditOutline size={40} />),
+            pauseOnFocusLoss: false
         });
         toast.clearWaitingQueue();
         setDisplayNamePlaceholder(nameRef.current?.value || user.displayName!);
