@@ -10,6 +10,7 @@ import './index.css';
 import Cards from './pages/Cards';
 import Index from './pages/Index';
 import Layout from './pages/layout/Layout';
+import Account from './pages/menu/Account';
 import Home from './pages/menu/Home';
 import Settings from './pages/menu/Settings';
 
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
                     {
                         path: 'settings',
                         element: <Settings />
+                    },
+                    {
+                        path: 'account',
+                        element: <Account />
                     }
                 ]
             }

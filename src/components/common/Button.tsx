@@ -7,7 +7,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button: FC<ButtonProps> = ({ text, className, children, ...props }) => {
     return (
-        <button className={clsx('main-card', 'relative h-20 min-w-full cursor-pointer select-none py-2 uppercase', className)} {...props}>
+        <button className={clsx('main-card relative flex h-20 max-w-full cursor-pointer select-none items-center justify-center py-2 uppercase', className)} {...props}>
             {text}
             {children}
         </button>

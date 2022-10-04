@@ -10,19 +10,19 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 const Input: FC<InputProps> = ({ placeholder, myRef, startDecorator, endDecorator, className, ...props }) => {
     return (
         <div className={clsx('relative', className)}>
-            <input ref={myRef} className={clsx('main-card h-[5rem] w-full px-4 outline-none',
+            <input ref={myRef} className={clsx('main-card h-full w-full px-4 outline-none',
                 startDecorator && 'pl-12', endDecorator && 'pr-12'
             )} placeholder={placeholder} {...props} />
             {
                 startDecorator && (
-                    <div className={'absolute left-2 top-5 h-10 w-10 text-gray-500'}>
+                    <div className={'relative left-2 top-[10%] h-10 w-10 translate-y-[50%] text-gray-500'}>
                         {startDecorator}
                     </div>
                 )
             }
             {
                 endDecorator && (
-                    <div className={'absolute right-2 top-5 h-10 w-10 text-gray-500'}>
+                    <div className={'absolute right-2 top-[20%] h-10 w-10 text-gray-500'}>
                         {endDecorator}
                     </div>
                 )

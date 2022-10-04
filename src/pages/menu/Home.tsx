@@ -19,20 +19,22 @@ const Home: FC<HomeProps> = () => {
 
     return (
         <div className='flex w-full flex-col gap-4'>
-            <div className='flex flex-col gap-4 md:flex-row'>
-                <Button className='flex-1' text={'Crear Juego'} />
+            <div className='flex w-full flex-col gap-4 md:flex-row'>
+                <div className='flex-1'>
+                    <Button className='w-full' text={'Crear Juego'} />
+                </div>
                 <Input className='h-20 flex-1' endDecorator={
-                    <AiOutlineSearch className={'h-full w-full'} onClick={handleSearchGameClick} />
+                    <AiOutlineSearch className={'mt-2 h-full w-full'} onClick={handleSearchGameClick} />
                 } myRef={searchGameRef} placeholder='Buscar Juego'/>
             </div>
             <div className='flex flex-row justify-center gap-16 lg:gap-4'>
                 <Link to={'/settings'}>
-                    <Button className='h-auto w-auto'>
-                        <IoSettingsSharp className={'h-full w-full fill-pink transition-all duration-1000 hover:rotate-90 dark:fill-light-pink'} />
+                    <Button className='h-20 w-20'>
+                        <IoSettingsSharp className={'h-full w-full fill-pink transition-all duration-1000 hover:rotate-90 dark:fill-light-pink dark:hover:fill-pink'} />
                     </Button>
                 </Link>
-                <Link to={'/profile'}>
-                    <Button className='h-auto w-auto'>
+                <Link to={'/account'}>
+                    <Button className='h-20 w-20'>
                         <IoPerson className={'h-full w-full fill-pink transition-all dark:fill-light-pink'} />
                     </Button>
                 </Link>

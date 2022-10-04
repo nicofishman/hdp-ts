@@ -32,10 +32,10 @@ const Settings: FC<SettingsProps> = () => {
     };
 
     return (
-        <div className='mx-0 flex flex-col items-center gap-6 lg:mx-[20%]'>
+        <div className='mx-0 flex flex-col items-center gap-6 lg:mx-[25%]'>
             <Link className='w-full' to='/'>
-                <Button className='flex h-12 w-full items-center justify-center' text='Volver'>
-                    <div className='absolute top-1 left-2'>
+                <Button className='group h-12 w-full' text='Volver'>
+                    <div className='absolute top-1 left-4 transition-transform duration-200 group-hover:left-2'>
                         <IoChevronBack/>
                     </div>
                 </Button>
@@ -45,7 +45,7 @@ const Settings: FC<SettingsProps> = () => {
                 <Switch checked={checked} setChecked={handleSwitchChange} />
                 <BsFillMoonFill />
             </Container>
-            <Select endDecoration={<MdLanguage />} mainOption='Idioma' options={[{ value: 'ES', text: 'Español' }, { value: 'EN', text: 'English' }]}/>
+            <Select mainOption='Idioma' options={[{ value: 'ES', text: 'Español' }, { value: 'EN', text: 'English' }]} startDecoration={<MdLanguage />}/>
         </div>
     );
 };
