@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import { IoChevronBack } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs';
+import { MdLanguage } from 'react-icons/md';
 
 import Button from '../../components/common/Button';
 import Container from '../../components/common/Container';
@@ -31,7 +32,7 @@ const Settings: FC<SettingsProps> = () => {
     };
 
     return (
-        <div className='mx-0 flex flex-col items-center gap-6 lg:mx-[15%]'>
+        <div className='mx-0 flex flex-col items-center gap-6 lg:mx-[20%]'>
             <Link className='w-full' to='/'>
                 <Button className='flex h-12 w-full items-center justify-center' text='Volver'>
                     <div className='absolute top-1 left-2'>
@@ -39,12 +40,12 @@ const Settings: FC<SettingsProps> = () => {
                     </div>
                 </Button>
             </Link>
-            <Container className='flex h-20 flex-row items-center justify-center gap-6'>
+            <Container className='flex h-20 flex-row items-center justify-center gap-8'>
                 <BsFillSunFill />
                 <Switch checked={checked} setChecked={handleSwitchChange} />
                 <BsFillMoonFill />
             </Container>
-            <Select mainOption='Idioma' options={[{ value: 'ES', text: 'Español' }, { value: 'EN', text: 'English' }]}/>
+            <Select endDecoration={<MdLanguage />} mainOption='Idioma' options={[{ value: 'ES', text: 'Español' }, { value: 'EN', text: 'English' }]}/>
         </div>
     );
 };
