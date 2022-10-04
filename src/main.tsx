@@ -3,9 +3,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {
     createBrowserRouter,
+    Outlet,
     RouterProvider
 } from 'react-router-dom';
 
+import AuthProvider from './context/AuthContext';
 import './index.css';
 import Cards from './pages/Cards';
 import Index from './pages/Index';
@@ -20,15 +22,27 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: (
-            // eslint-disable-next-line tailwindcss/no-custom-classname
-            <div className={clsx('layout', isDark && 'dark')}>
-                <Layout />
-            </div>
+            <AuthProvider>
+                {/* eslint-disable-next-line tailwindcss/no-custom-classname */}
+                <div className={clsx('layout', isDark && 'dark')}>
+                    <Layout />
+                </div>
+            </AuthProvider>
         ),
         children: [
             {
                 path: '/cards',
-                element: <Cards />
+                element: <div><Outlet/></div>,
+                children: [
+                    {
+                        path: 'es',
+                        element: <Cards lang='es' />
+                    },
+                    {
+                        path: 'en',
+                        element: <Cards lang='en' />
+                    }
+                ]
             },
             {
                 path: '/',

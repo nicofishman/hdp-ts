@@ -8,7 +8,7 @@
 }
 
 .bg-main {
-    @apply bg-white dark:bg-negrito dark:text-gray-300 
+    @apply bg-white dark:bg-negrito dark:text-gray-200 fill-black dark:fill-gray-200
 }
 
 .main-card {

@@ -3,6 +3,7 @@ import { IoChevronBack } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 
 import Button from '../../components/common/Button';
+import { useAuthContext } from '../../context/AuthContext';
 import LogIn from '../account/LogIn';
 import UserInfo from '../account/UserInfo';
 
@@ -11,10 +12,10 @@ interface AccountProps {
 };
 
 const Account: FC<AccountProps> = () => {
-    const isLoggedIn = false;
+    const { user } = useAuthContext();
 
     return (
-        <div className='mx-0 flex flex-col items-center gap-6 lg:mx-[25%]'>
+        <div className='mx-0 flex flex-col items-center gap-6 md:mx-[10%] lg:mx-[17%] xl:mx-[22%]'>
             <Link className='w-full' to='/'>
                 <Button className='group flex h-12 w-full items-center justify-center' text='Volver'>
                     <div className='absolute top-1 left-4 transition-transform duration-200 group-hover:left-2'>
@@ -23,7 +24,7 @@ const Account: FC<AccountProps> = () => {
                 </Button>
             </Link>
             {
-                !isLoggedIn
+                !(user.uid)
                     ? (
                         <LogIn />
                     )

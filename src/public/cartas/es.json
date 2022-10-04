@@ -818,7 +818,7 @@
         },
         {
             "id": 137,
-            "text": "Mariano Grondona agarrándose el escroto en un gancho de cortina",
+            "text": "Julio Grondona agarrándose el escroto en un gancho de cortina",
             "color": "White",
             "extension": "Base"
         },
@@ -1550,7 +1550,7 @@
         },
         {
             "id": 259,
-            "text": "Mariano Grondona vomitando convulsamente mientras una camada de arañas cangrejo incuban en su cerebro y salen por sus conductos lagrimales",
+            "text": "Julio Grondona vomitando convulsamente mientras una camada de arañas cangrejo incuban en su cerebro y salen por sus conductos lagrimales",
             "color": "White",
             "extension": "Base"
         },
@@ -2204,7 +2204,7 @@
         },
         {
             "id": 368,
-            "text": "Mariano Grondona siendo acosado por una bandada de buitres",
+            "text": "Julio Grondona siendo acosado por una bandada de buitres",
             "color": "White",
             "extension": "Base"
         },
@@ -3459,6 +3459,12 @@
         {
             "id": 578,
             "text": "Los de Jabad",
+            "color": "White",
+            "extension": "mia"
+        },
+        {
+            "id": 579,
+            "text": "Las manos de Perel",
             "color": "White",
             "extension": "mia"
         }

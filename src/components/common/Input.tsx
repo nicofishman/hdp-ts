@@ -15,14 +15,14 @@ const Input: FC<InputProps> = ({ placeholder, myRef, startDecorator, endDecorato
             )} placeholder={placeholder} {...props} />
             {
                 startDecorator && (
-                    <div className={'relative left-2 top-[10%] h-10 w-10 translate-y-[50%] text-gray-500'}>
+                    <div className={'relative left-2 top-[10%] h-10 w-10 translate-y-[50%]'}>
                         {startDecorator}
                     </div>
                 )
             }
             {
                 endDecorator && (
-                    <div className={'absolute right-2 top-[20%] h-10 w-10 text-gray-500'}>
+                    <div className={'absolute right-2 top-[20%] h-10 w-10'}>
                         {endDecorator}
                     </div>
                 )
