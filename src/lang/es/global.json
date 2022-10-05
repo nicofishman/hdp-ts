@@ -25,5 +25,8 @@
     "firebaseErrors": {
         "auth/email-already-in-use": "Email ya en uso"
     },
+    "auth": {
+        "loginRequired": "Por favor ingresa a tu cuenta"
+    },
     "language": "Idioma"
 }

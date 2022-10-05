@@ -16,7 +16,6 @@
     "playernotingame": "You are not in the game",
     "code": "Code",
     "startgame": "Start Game",
-    "notloggedin": "Log in to perform this action",
     "gamestarted": "The game has started",
     "waitingforcards": "Waiting for players to send their cards",
     "waitingforhdp": "Waiting for the hdp to choose the winner",
@@ -24,6 +23,9 @@
     "goback": "Go Back",
     "firebaseErrors": {
         "auth/email-already-in-use": "Email already in use"
+    },
+    "auth": {
+        "loginRequired": "Please log in to create a game"
     },
     "language": "Language"
 }

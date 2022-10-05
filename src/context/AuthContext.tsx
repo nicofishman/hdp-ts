@@ -14,7 +14,7 @@ interface AuthContextType {
     logOut : () => Promise<void>;
     user: User;
     loading: boolean;
-    changeDisplayName: (displayName: string) => Promise<void>;
+    changeDisplayName: (displayName: string) => Promise<void>
 }
 
 export const AuthContext = createContext<AuthContextType | null >(null);

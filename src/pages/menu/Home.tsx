@@ -2,11 +2,13 @@ import React, { FC, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { IoSettingsSharp, IoPerson } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
+import { useAuthContext } from '../../context/AuthContext';
+import { createGame } from '../../firebase/Firestore';
 
 interface HomeProps {
 
@@ -15,25 +17,33 @@ interface HomeProps {
 const Home: FC<HomeProps> = () => {
     const searchGameRef = useRef<HTMLInputElement>(null);
     const [t] = useTranslation('global');
+    const { user } = useAuthContext();
+    const navigate = useNavigate();
 
     const handleSearchGameClick = () => {
         console.log(searchGameRef.current?.value);
     };
 
-    const handleToast = () => {
-        toast('Logged out scuccessfully', {
-            type: 'success',
-            containerId: 'A',
-            position: 'top-right',
-            theme: 'light'
-        });
+    const handleCreateGame = () => {
+        if (!user.uid) {
+            toast(t('auth.loginRequired'), {
+                type: 'error',
+                containerId: 'A',
+                theme: 'colored',
+                position: 'top-right'
+            });
+            toast.clearWaitingQueue();
+
+            return;
+        }
+        createGame(user, window.localStorage.getItem('lang') || 'es', navigate);
     };
 
     return (
         <div className='flex w-full flex-col gap-4'>
             <div className='flex w-full flex-col gap-4 md:flex-row'>
                 <div className='flex-1'>
-                    <Button className='w-full' text={t('create')} onClick={handleToast} />
+                    <Button className='w-full' text={t('create')} onClick={handleCreateGame} />
                 </div>
                 <div className='flex-1'>
                     <Input className='h-20' endDecorator={
