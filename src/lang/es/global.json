@@ -21,5 +21,9 @@
     "waitingforcards": "Esperando a que los jugadores envíen sus cartas",
     "waitingforhdp": "Esperando a que el hdp elija el ganador",
     "codecopied": "Código copiado al portapapeles",
-    "goback": "Volver"
+    "goback": "Volver",
+    "firebaseErrors": {
+        "auth/email-already-in-use": "Email ya en uso"
+    },
+    "language": "Idioma"
 }

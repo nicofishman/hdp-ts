@@ -21,5 +21,9 @@
     "waitingforcards": "Waiting for players to send their cards",
     "waitingforhdp": "Waiting for the hdp to choose the winner",
     "codecopied": "Code copied to clipboard",
-    "goback": "Go Back"
+    "goback": "Go Back",
+    "firebaseErrors": {
+        "auth/email-already-in-use": "Email already in use"
+    },
+    "language": "Language"
 }

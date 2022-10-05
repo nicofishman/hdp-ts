@@ -28,15 +28,13 @@ const Select: FC<SelectProps> = ({ mainOption, options, startDecoration, endDeco
                     </div>
                 )
             }
-            <select className={clsx('bg-main h-full w-full cursor-pointer rounded-lg border-none py-2.5 text-center text-lg text-gray-900 dark:placeholder:text-gray-400', endDecoration && 'pr-14')} id="countries" onChange={(e) => {
-                console.log(e.target.value);
-
+            <select className={clsx('bg-main h-full w-full cursor-pointer rounded-lg border-none py-2.5 text-center text-lg text-gray-900 dark:placeholder:text-gray-400', endDecoration && 'pr-14')} defaultValue={mainOption} id="countries" onChange={(e) => {
                 onChange && onChange(e.target.value || 'es');
             }}>
-                <option disabled>{mainOption}</option>
+                <option disabled value={mainOption}>{mainOption}</option>
                 {
                     options.map((option, index) => (
-                        <option key={index} selected={option.selected} value={option.value}>{option.text}</option>
+                        <option key={index} value={option.value}>{option.text}</option>
                     ))
                 }
             </select>

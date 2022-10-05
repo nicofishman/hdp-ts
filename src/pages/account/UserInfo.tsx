@@ -13,7 +13,7 @@ interface UserInfoProps {
 
 const UserInfo: FC<UserInfoProps> = () => {
     const { user, logOut, changeDisplayName } = useAuthContext();
-    const [displayNamePlaceholder, setDisplayNamePlaceholder] = useState(user?.displayName ? user.displayName : 'Nombre de usuario');
+    const [displayNamePlaceholder, setDisplayNamePlaceholder] = useState(user?.displayName ?? 'Nombre de usuario');
     const nameRef = useRef<HTMLInputElement>(null);
 
     const changeName = async () => {

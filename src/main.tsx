@@ -20,6 +20,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import i18n from './lang/i18n';
 
 const isDark = window.localStorage.getItem('theme') === 'dark';
+const lang = window.localStorage.getItem('lang') || 'es';
+
+i18n.changeLanguage(lang);
 
 const router = createBrowserRouter([
     {

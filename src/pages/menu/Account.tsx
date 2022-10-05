@@ -20,7 +20,7 @@ const Account: FC<AccountProps> = () => {
         <div className='mx-0 flex flex-col items-center gap-6 md:mx-[10%] lg:mx-[10%] xl:mx-[15%]'>
             <Link className='w-full' to='/'>
                 <Button className='group flex h-12 w-full items-center justify-center' text={t('goback')}>
-                    <div className='absolute top-1 left-4 transition-all duration-200 group-hover:left-2'>
+                    <div className='absolute top-1 left-4 transition-transform duration-200 group-hover:-translate-x-3'>
                         <IoChevronBack/>
                     </div>
                 </Button>

@@ -35,13 +35,14 @@ const Settings: FC<SettingsProps> = () => {
 
     const handleToggleLang = (value: string) => {
         i18n.changeLanguage(value);
+        window.localStorage.setItem('lang', value);
     };
 
     return (
-        <div className='mx-0 flex flex-col items-center gap-6 lg:mx-[25%]'>
+        <div className='mx-0 flex flex-col items-center gap-6 lg:mx-[10%] xl:mx-[20%]'>
             <Link className='w-full' to='/'>
                 <Button className='group h-12 w-full' text={t('goback')}>
-                    <div className='absolute top-1 left-4 transition-all duration-200 group-hover:left-2'>
+                    <div className='absolute top-1 left-4 transition-transform duration-200 group-hover:-translate-x-3'>
                         <IoChevronBack/>
                     </div>
                 </Button>
@@ -51,7 +52,7 @@ const Settings: FC<SettingsProps> = () => {
                 <Switch checked={checked} setChecked={handleSwitchChange} />
                 <BsFillMoonFill />
             </Container>
-            <Select mainOption='Idioma' options={[{ value: 'es', text: 'Español', selected: i18n.language === 'es' }, { value: 'en', text: 'English', selected: i18n.language === 'en' }]} startDecoration={<MdLanguage />} onChange={handleToggleLang}/>
+            <Select mainOption={t('language')} options={[{ value: 'es', text: 'Español', selected: i18n.language === 'es' }, { value: 'en', text: 'English', selected: i18n.language === 'en' }]} startDecoration={<MdLanguage />} onChange={handleToggleLang}/>
         </div>
     );
 };

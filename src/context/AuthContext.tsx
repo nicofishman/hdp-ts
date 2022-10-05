@@ -1,5 +1,8 @@
 import React, { createContext, FC, PropsWithChildren, useContext, useMemo, useState } from 'react';
 import { getAuth, GoogleAuthProvider, onAuthStateChanged, updateProfile, User, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { toast } from 'react-toastify';
+import { ImCross } from 'react-icons/im';
+import { useTranslation } from 'react-i18next';
 
 import FirebaseErrors from '../firebase/Errors';
 import { FirebaseApp } from '../firebase/FirebaseApp';
@@ -24,6 +27,8 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     const [user, setUser] = useState<User>({} as User);
     const [loading, setLoading] = useState(false);
 
+    const { t } = useTranslation('global');
+
     onAuthStateChanged(auth, (currentUser) => {
         if (currentUser) {
             setUser(currentUser);
@@ -41,6 +46,13 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
                 setUser(user);
             }).catch((error) => {
                 console.log(error);
+                toast(error, {
+                    type: 'error',
+                    containerId: 'A',
+                    theme: 'colored',
+                    icon: () => (<ImCross size={40} />),
+                    pauseOnFocusLoss: false
+                });
             });
     };
 
@@ -66,18 +78,22 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
                 try {
                     await signInWithEmailAndPassword(auth, email, password);
                 } catch (error: any) {
-                    console.log(error);
-                    if (error.code === FirebaseErrors.wrongPassword) {
-                        console.log('ERROR: Wrong password');
-
-                        // setWrongPasswordAlert(true);
-                        // setTimeout(() => { // Se borra la alerta después de 5 segundos
-                        //     setWrongPasswordAlert(false);
-                        // }, 5000);
-                    }
+                    toast(t(error.code), {
+                        type: 'error',
+                        containerId: 'A',
+                        theme: 'colored',
+                        icon: () => (<ImCross size={40} />),
+                        pauseOnFocusLoss: false
+                    });
                 }
             } else {
-                console.log(error);
+                toast(t('firebaseErrors.auth/email-already-in-use'), {
+                    type: 'error',
+                    containerId: 'A',
+                    theme: 'colored',
+                    icon: () => (<ImCross size={40} />),
+                    pauseOnFocusLoss: false
+                });
             }
         }
     };
