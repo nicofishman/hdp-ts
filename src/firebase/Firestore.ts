@@ -1,10 +1,10 @@
 import { User } from 'firebase/auth';
-import { getFirestore, doc, setDoc, collection, getDocs, query, where, arrayUnion, updateDoc } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, collection, getDocs, query, where, arrayUnion, updateDoc, arrayRemove } from 'firebase/firestore';
 import { TFunction } from 'react-i18next';
 import { NavigateFunction } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { Game } from '../types/game';
+import { Game, Player } from '../types/game';
 import { generateShortCode } from '../utils/game';
 
 import { FirebaseApp } from './FirebaseApp';
@@ -105,6 +105,14 @@ export const addPlayerToGame = async (user: User, gameId: string) => {
             isHdp: false,
             points: 0
         })
+    });
+};
+
+export const removePlayerFromGame = async (player: Player, gameId: string) => {
+    const gameRef = doc(gamesRef, gameId);
+
+    await updateDoc(gameRef, {
+        players: arrayRemove(player)
     });
 };
 

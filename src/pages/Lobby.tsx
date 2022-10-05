@@ -39,8 +39,11 @@ const Lobby: FC<LobbyProps> = () => {
                     containerId: 'A',
                     theme: 'colored',
                     closeOnClick: false,
-                    autoClose: false,
-                    closeButton: false
+                    autoClose: 5000,
+                    closeButton: false,
+                    onClose: () => {
+                        navigate('/');
+                    }
                 });
             } else {
                 if (data.isStarted) {
@@ -56,7 +59,7 @@ const Lobby: FC<LobbyProps> = () => {
         ? (
             <div className='flex items-center justify-center'>
                 {
-                    <PlayersCard players={game.players.map(p => ({ displayName: p.displayName!, isOwner: p.id === game.owner }))}/>
+                    <PlayersCard gameId={game.id} gameOwner={game.owner} players={game.players} userId={user.uid}/>
                 }
                 <div className='absolute bottom-5'>
                     <ShortCodeCard code={game.shortCode}/>

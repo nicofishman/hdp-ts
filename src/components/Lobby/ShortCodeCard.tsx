@@ -19,7 +19,7 @@ const ShortCodeCard: FC<ShortCodeCardProps> = ({ code }) => {
             <h1 className='font-main text-2xl font-light'>{t('code')}</h1>
             <div className="flex flex-row items-center gap-2">
                 <div className="flex w-1/2 justify-end">
-                    <span className='font-main text-2xl'>{isShown ? code : '●'.repeat(code.length)}</span>
+                    <span className='font-main text-2xl'>{isShown ? code : '•'.repeat(code.length)}</span>
                 </div>
                 <div className="flex w-1/2 flex-row items-center gap-2">
                     {
