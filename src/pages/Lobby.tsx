@@ -5,6 +5,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import SpinningWheel from '../components/common/SpinningWheel';
+import PlayersCard from '../components/Lobby/PlayersCard';
+import ShortCodeCard from '../components/Lobby/ShortCodeCard';
 import { useAuthContext } from '../context/AuthContext';
 import { db } from '../firebase/Firestore';
 import { Game, Player } from '../types/game';
@@ -21,18 +23,7 @@ const Lobby: FC<LobbyProps> = () => {
     const { t } = useTranslation('global');
 
     useEffect(() => {
-        if (!user.uid) {
-            toast(t('auth.loginRequired'), {
-                type: 'error',
-                containerId: 'A',
-                theme: 'colored',
-                position: 'top-right'
-            });
-            toast.clearWaitingQueue();
-
-            return;
-        };
-        onSnapshot(doc(db, `Games/${id}`), (snapshot) => {
+        const unsuscribe = onSnapshot(doc(db, `Games/${id}`), (snapshot) => {
             const data = snapshot.data();
 
             if (!data) return;
@@ -48,7 +39,8 @@ const Lobby: FC<LobbyProps> = () => {
                     containerId: 'A',
                     theme: 'colored',
                     closeOnClick: false,
-                    autoClose: false
+                    autoClose: false,
+                    closeButton: false
                 });
             } else {
                 if (data.isStarted) {
@@ -56,19 +48,19 @@ const Lobby: FC<LobbyProps> = () => {
                 }
             }
         });
+
+        return () => unsuscribe();
     }, [user]);
 
     return game.id
         ? (
-            <div>
+            <div className='flex items-center justify-center'>
                 {
-                    game.players.map(p => (
-                        <div key={p.id}>
-                            {p.displayName}
-                        </div>
-                    ))
+                    <PlayersCard players={game.players.map(p => ({ displayName: p.displayName!, isOwner: p.id === game.owner }))}/>
                 }
-                {game.shortCode}
+                <div className='absolute bottom-5'>
+                    <ShortCodeCard code={game.shortCode}/>
+                </div>
             </div>
         )
         : (

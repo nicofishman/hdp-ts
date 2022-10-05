@@ -1,4 +1,4 @@
-import React, { createContext, FC, PropsWithChildren, useContext, useMemo, useState } from 'react';
+import React, { createContext, FC, PropsWithChildren, useContext, useEffect, useMemo, useState } from 'react';
 import { getAuth, GoogleAuthProvider, onAuthStateChanged, updateProfile, User, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import { ImCross } from 'react-icons/im';
@@ -29,14 +29,20 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 
     const { t } = useTranslation('global');
 
-    onAuthStateChanged(auth, (currentUser) => {
-        if (currentUser) {
-            setUser(currentUser);
-            if (currentUser.providerData[0].providerId === 'password' && auth.currentUser) {
-                updateProfile(auth.currentUser, { displayName: currentUser.email?.split('@')[0] });
+    useEffect(() => {
+        const unsuscribe = onAuthStateChanged(auth, (currentUser) => {
+            console.log('currentUser', currentUser);
+
+            if (currentUser) {
+                setUser(currentUser);
+                if (currentUser.providerData[0].providerId === 'password' && auth.currentUser) {
+                    updateProfile(auth.currentUser, { displayName: currentUser.email?.split('@')[0] });
+                }
             }
-        }
-    });
+        });
+
+        return () => unsuscribe();
+    }, [auth]);
 
     const signInWithGoogle = async () => {
         signInWithPopup(auth, googleProvider)

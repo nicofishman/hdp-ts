@@ -1,5 +1,5 @@
 export interface Player {
-    displayName: string;
+    displayName: string | null;
     id: string;
     isHdp: boolean;
     points: number;

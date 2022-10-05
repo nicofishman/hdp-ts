@@ -28,5 +28,7 @@
     "auth": {
         "loginRequired": "Por favor ingresa a tu cuenta"
     },
-    "language": "Idioma"
+    "language": "Idioma",
+    "invalidshortcode": "Código de sala inválido",
+    "alreadyingame": "Ya estás en un juego"
 }
