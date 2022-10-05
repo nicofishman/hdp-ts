@@ -31,10 +31,10 @@ const UserInfo: FC<UserInfoProps> = () => {
 
     return (
         <div className='flex w-full flex-col gap-8'>
-            <Input endDecorator={
+            <Input className='text-4xl' endDecorator={
                 <IoMdSend className='cursor-pointer' size={30} onClick={changeName}/>
             } label='Display Name' myRef={nameRef} placeholder={displayNamePlaceholder} />
-            <Button className='w-full' text='Log Out' onClick={logOut}/>
+            <Button className='w-full text-4xl' text='Log Out' onClick={logOut}/>
         </div>
     );
 };

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+import Button from '../components/common/Button';
 import SpinningWheel from '../components/common/SpinningWheel';
 import PlayersCard from '../components/Lobby/PlayersCard';
 import ShortCodeCard from '../components/Lobby/ShortCodeCard';
@@ -40,6 +41,8 @@ const Lobby: FC<LobbyProps> = () => {
                     theme: 'colored',
                     closeOnClick: false,
                     autoClose: 5000,
+                    hideProgressBar: false,
+                    pauseOnHover: false,
                     closeButton: false,
                     onClose: () => {
                         navigate('/');
@@ -57,11 +60,14 @@ const Lobby: FC<LobbyProps> = () => {
 
     return game.id
         ? (
-            <div className='flex items-center justify-center'>
+            <div className='relative mx-[10%] flex h-screen w-full min-w-[215px] flex-col items-center justify-center gap-8 sm:mx-[17%] md:mx-[15%] lg:mx-[25%] xl:mx-[35%]'>
+                <PlayersCard gameId={game.id} gameOwner={game.owner} players={game.players} userId={user.uid}/>
                 {
-                    <PlayersCard gameId={game.id} gameOwner={game.owner} players={game.players} userId={user.uid}/>
+                    game.owner === user.uid && (
+                        <Button className='h-10 w-1/2 min-w-[160px] text-lg' text={t('startgame')}/>
+                    )
                 }
-                <div className='absolute bottom-5'>
+                <div className='absolute bottom-5 w-1/2 min-w-[160px]'>
                     <ShortCodeCard code={game.shortCode}/>
                 </div>
             </div>

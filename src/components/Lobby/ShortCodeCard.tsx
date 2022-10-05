@@ -15,7 +15,7 @@ const ShortCodeCard: FC<ShortCodeCardProps> = ({ code }) => {
     const { t } = useTranslation('global');
 
     return (
-        <Container className='flex w-64 flex-col items-center'>
+        <Container className='flex w-full flex-col items-center'>
             <h1 className='font-main text-2xl font-light'>{t('code')}</h1>
             <div className="flex flex-row items-center gap-2">
                 <div className="flex w-1/2 justify-end">

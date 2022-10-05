@@ -14,10 +14,8 @@ interface PlayersCardProps {
 };
 
 const PlayersCard: FC<PlayersCardProps> = ({ players, gameOwner, userId, gameId }) => {
-    console.log('players', players, userId);
-
     return (
-        <Container className='flex w-auto flex-col'>
+        <Container className='flex w-full flex-col'>
             <div className='divide-y divide-gray-400'>
                 {
                     players.map((p, i) => (

@@ -12,5 +12,5 @@
 }
 
 .main-card {
-    @apply min-h-fit bg-main text-4xl font-main font-medium rounded-md shadow-my-card border-[1px] border-black dark:border-[#666]
+    @apply min-h-fit bg-main font-main font-medium rounded-md shadow-my-card border-[1px] border-black dark:border-[#666]
 }

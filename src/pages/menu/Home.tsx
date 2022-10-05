@@ -53,10 +53,10 @@ const Home: FC<HomeProps> = () => {
         <div className='flex w-full flex-col gap-4'>
             <div className='flex w-full flex-col gap-4 md:flex-row'>
                 <div className='flex-1'>
-                    <Button className='w-full' text={t('create')} onClick={handleCreateGame} />
+                    <Button className='w-full text-4xl' text={t('create')} onClick={handleCreateGame} />
                 </div>
                 <div className='flex-1'>
-                    <Input className='h-20' endDecorator={
+                    <Input className='h-20 text-4xl' endDecorator={
                         <AiOutlineSearch className={'mt-2 h-full w-full'} onClick={handleSearchGameClick} />
                     } myRef={searchGameRef} placeholder={t('search')}/>
                 </div>

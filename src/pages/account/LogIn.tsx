@@ -26,14 +26,14 @@ const LogIn: FC<LogInProps> = () => {
 
     return (
         <div className='flex w-full select-none flex-col items-center'>
-            <Button className='h-16 w-16' onClick={signInWithGoogle} >
+            <Button className='h-16 w-16 text-4xl' onClick={signInWithGoogle} >
                 <AiOutlineGoogle size={50}/>
             </Button>
             <h1 className='py-3 text-2xl font-bold'>— OR —</h1>
             <div className='flex w-full flex-col gap-4'>
 
-                <Input className='h-14 w-full' myRef={emailRef} placeholder={t('email')} />
-                <Input className='h-14 w-full' endDecorator={
+                <Input className='h-14 w-full text-4xl' myRef={emailRef} placeholder={t('email')} />
+                <Input className='h-14 w-full text-4xl' endDecorator={
                     passwordVisible
                         ? (
                             <AiFillEye className='h-full w-full fill-black dark:fill-gray-300' onClick={() => setPasswordVisible(!passwordVisible)} />
@@ -42,7 +42,7 @@ const LogIn: FC<LogInProps> = () => {
                             <AiFillEyeInvisible className='h-full w-full fill-black dark:fill-gray-300' onClick={() => setPasswordVisible(!passwordVisible)} />
                         )
                 } myRef={passwordRef} placeholder={t('password')} type={passwordVisible ? 'text' : 'password'} />
-                <Button className='h-14 w-full' text={t('login')} onClick={logInEmailAndPassword} />
+                <Button className='h-14 w-full text-4xl' text={t('login')} onClick={logInEmailAndPassword} />
             </div>
         </div>
     );
