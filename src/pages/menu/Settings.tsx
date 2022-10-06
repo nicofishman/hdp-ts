@@ -42,7 +42,7 @@ const Settings: FC<SettingsProps> = () => {
         <div className='mx-0 flex flex-col items-center gap-6 lg:mx-[10%] xl:mx-[20%]'>
             <Link className='w-full' to='/'>
                 <Button className='group h-12 w-full' text={t('goback')}>
-                    <div className='absolute top-1 left-4 transition-transform duration-200 group-hover:-translate-x-3'>
+                    <div className='absolute top-3.5 left-4 transition-transform duration-200 group-hover:-translate-x-3'>
                         <IoChevronBack/>
                     </div>
                 </Button>

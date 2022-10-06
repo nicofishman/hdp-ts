@@ -32,7 +32,7 @@ const Home: FC<HomeProps> = () => {
 
             return;
         }
-        createGame(user, window.localStorage.getItem('lang') || 'es', navigate);
+        createGame(user, window.localStorage.getItem('lang') === 'en' ? 'en' : 'es', navigate);
     };
 
     const handleSearchGameClick = () => {
@@ -53,7 +53,7 @@ const Home: FC<HomeProps> = () => {
         <div className='flex w-full flex-col gap-4'>
             <div className='flex w-full flex-col gap-4 md:flex-row'>
                 <div className='flex-1'>
-                    <Button className='w-full text-4xl' text={t('create')} onClick={handleCreateGame} />
+                    <Button className='h-20 w-full text-4xl' text={t('create')} onClick={handleCreateGame} />
                 </div>
                 <div className='flex-1'>
                     <Input className='h-20 text-4xl' endDecorator={

@@ -1,4 +1,10 @@
+import { Languages } from '../lang/i18n';
+import cartasEn from '../public/cartas/en.json';
+import cartasEs from '../public/cartas/es.json';
+import { Card } from '../types/game';
 const characters = 'CDEFHJKMNPRTVWXY23456789';
+
+;
 
 export const generateShortCode = () => {
     const rand = new Uint32Array(1);
@@ -16,4 +22,22 @@ export const generateShortCode = () => {
     }
 
     return code;
+};
+
+export const shuffleCards = (lang: Languages, sentCards: number[], cardsPerPlayer: number) => {
+    const cards: { whiteCards: Card[], blackCards: Card[] } = lang === 'es' ? cartasEs : cartasEn;
+
+    console.log(sentCards);
+
+    const cardsToShuffle = cards.whiteCards.filter((card: Card) => !sentCards.includes(card.id)).map((card: Card) => card.id);
+
+    const shuffledCards = cardsToShuffle.sort(() => 0.5 - Math.random());
+
+    const cardsToReturn = [];
+
+    for (let i = 0; i < cardsPerPlayer; i++) {
+        cardsToReturn.push(shuffledCards[i]);
+    }
+
+    return cardsToReturn;
 };

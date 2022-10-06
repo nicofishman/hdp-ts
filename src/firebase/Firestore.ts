@@ -1,15 +1,17 @@
 import { User } from 'firebase/auth';
-import { getFirestore, doc, setDoc, collection, getDocs, query, where, arrayUnion, updateDoc, arrayRemove } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, collection, getDocs, query, where, arrayUnion, updateDoc, arrayRemove, getDoc } from 'firebase/firestore';
 import { TFunction } from 'react-i18next';
 import { NavigateFunction } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+import { Languages } from '../lang/i18n';
 import { Game, Player } from '../types/game';
-import { generateShortCode } from '../utils/game';
+import { generateShortCode, shuffleCards } from '../utils/game';
 
 import { FirebaseApp } from './FirebaseApp';
 
 const firebaseApp = FirebaseApp;
+const WHITE_CARDS_PER_PLAYER = 6;
 
 export const db = getFirestore(firebaseApp);
 const gamesRef = collection(db, 'Games').withConverter({
@@ -63,7 +65,7 @@ const getGameByShortCode = async (shortCode: string) => {
     return docs[0];
 };
 
-export const createGame = async (user: User, lang: string, navigate: NavigateFunction) => {
+export const createGame = async (user: User, lang: Languages, navigate: NavigateFunction) => {
     const newGameRef = doc(gamesRef);
     let shortCode = generateShortCode();
 
@@ -84,6 +86,8 @@ export const createGame = async (user: User, lang: string, navigate: NavigateFun
         owner: user.uid,
         isStarted: false,
         sentCards: [],
+        usedCards: [],
+        currentBlackCard: null,
         lang,
         shortCode
     };
@@ -167,4 +171,31 @@ export const joinGame = async (user: User, shortCode: string, navigate: Navigate
 
     await addPlayerToGame(user, game.id);
     navigate(`/lobby/${game.id}`);
+};
+
+export const startGame = async (gameId: string) => {
+    const gameRef = doc(gamesRef, gameId);
+    const gameData = await getDoc(gameRef).then(g => g.data()) as Game;
+
+    const newPlayers: Player[] = [];
+    const usedCards: number[] = gameData.usedCards;
+
+    gameData.players.forEach(player => {
+        const playerCards = shuffleCards(gameData.lang, usedCards, WHITE_CARDS_PER_PLAYER);
+
+        console.log('playerCards', player.displayName, playerCards);
+
+        newPlayers.push({
+            ...player,
+            cards: playerCards
+        });
+
+        usedCards.push(...playerCards);
+    });
+
+    await updateDoc(gameRef, {
+        players: newPlayers,
+        isStarted: true,
+        usedCards
+    });
 };

@@ -23,7 +23,7 @@ const Index: FC<IndexProps> = () => {
     }, []);
 
     return (
-        <div className='flex h-screen w-full flex-col items-center justify-center px-5 lg:w-[40%] lg:p-0'>
+        <div className='flex h-auto w-full flex-col items-center justify-center px-5 lg:w-[40%] lg:p-0'>
             <div className='flex w-full flex-[0.5] md:flex-[0.7] lg:flex-[0.95]'>
                 <div className="flex w-full self-end">
                     <img className={'h-full w-full'} src={isDark ? LogoDark : LogoLight}/>

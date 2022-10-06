@@ -9,7 +9,7 @@ import SpinningWheel from '../components/common/SpinningWheel';
 import PlayersCard from '../components/Lobby/PlayersCard';
 import ShortCodeCard from '../components/Lobby/ShortCodeCard';
 import { useAuthContext } from '../context/AuthContext';
-import { db } from '../firebase/Firestore';
+import { db, startGame } from '../firebase/Firestore';
 import { Game, Player } from '../types/game';
 
 interface LobbyProps {
@@ -33,8 +33,6 @@ const Lobby: FC<LobbyProps> = () => {
             const playersIdArray = data.players.map((p: Player) => p.id);
 
             if (!playersIdArray.includes(user.uid)) {
-                console.log('not in game', playersIdArray, user.uid);
-
                 toast(t('playernotingame'), {
                     type: 'error',
                     containerId: 'A',
@@ -58,13 +56,29 @@ const Lobby: FC<LobbyProps> = () => {
         return () => unsuscribe();
     }, [user]);
 
+    const startGameClick = () => {
+        if (game.players.length < 2) {
+            toast(t('minplayers'), {
+                type: 'error',
+                containerId: 'A',
+                theme: 'colored',
+                closeOnClick: false,
+                autoClose: 5000,
+                hideProgressBar: false,
+                pauseOnHover: false
+            });
+        } else {
+            startGame(game.id);
+        }
+    };
+
     return game.id
         ? (
             <div className='relative mx-[10%] flex h-screen w-full min-w-[215px] flex-col items-center justify-center gap-8 sm:mx-[17%] md:mx-[15%] lg:mx-[25%] xl:mx-[35%]'>
                 <PlayersCard gameId={game.id} gameOwner={game.owner} players={game.players} userId={user.uid}/>
                 {
                     game.owner === user.uid && (
-                        <Button className='h-10 w-1/2 min-w-[160px] text-lg' text={t('startgame')}/>
+                        <Button className='h-10 w-1/2 min-w-[160px] text-lg' text={t('startgame')} onClick={startGameClick}/>
                     )
                 }
                 <div className='absolute bottom-5 w-1/2 min-w-[160px]'>

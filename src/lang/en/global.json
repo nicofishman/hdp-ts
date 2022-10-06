@@ -29,5 +29,6 @@
     },
     "language": "Language",
     "invalidshortcode": "Invalid game code",
-    "alreadyingame": "You are already in a game"
+    "alreadyingame": "You are already in a game",
+    "minplayers": "Minimum number of players not reached"
 }

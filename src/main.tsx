@@ -19,6 +19,7 @@ import Settings from './pages/menu/Settings';
 import 'react-toastify/dist/ReactToastify.css';
 import i18n from './lang/i18n';
 import Lobby from './pages/Lobby';
+import Game from './pages/Game';
 
 const isDark = window.localStorage.getItem('theme') === 'dark';
 const lang = window.localStorage.getItem('lang') || 'es';
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
                 element: <div><Outlet/></div>,
                 children: [
                     {
+                        path: '',
+                        element: <Cards lang='es' />
+                    },
+                    {
                         path: 'es',
                         element: <Cards lang='es' />
                     },
@@ -54,6 +59,10 @@ const router = createBrowserRouter([
             {
                 path: '/lobby/:id',
                 element: <Lobby />
+            },
+            {
+                path: '/game/:id',
+                element: <Game />
             },
             {
                 path: '/',

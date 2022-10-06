@@ -3,9 +3,10 @@ import React, { FC } from 'react';
 import cartasEs from '../public/cartas/es.json';
 import cartasEn from '../public/cartas/en.json';
 import Card from '../components/Card';
+import { Languages } from '../lang/i18n';
 
 interface CardsProps {
-    lang: 'es' | 'en'
+    lang: Languages
 }
 
 const Cards: FC<CardsProps> = ({ lang = 'es' }) => {
