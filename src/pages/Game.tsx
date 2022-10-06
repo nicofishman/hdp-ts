@@ -21,11 +21,10 @@ const Game: FC<GameProps> = () => {
     const { id } = useParams<{id: string}>();
     const { user } = useAuthContext();
     const navigate = useNavigate();
-    const { setIsDragging, setDraggedCard } = useDragAndDropContext();
+    const { setIsDragging, setDraggedCard, myCards, setMyCards } = useDragAndDropContext();
     const { t } = useTranslation('global');
 
     const [game, setGame] = useState<GameType>({} as GameType);
-    const [myCards, setMyCards] = useState<number[]>([]);
 
     useEffect(() => {
         if (!user) return;

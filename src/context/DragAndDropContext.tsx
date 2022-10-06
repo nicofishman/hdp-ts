@@ -7,9 +7,12 @@ interface DragAndDropContextType {
     setDraggedCard: (draggedCard: number | null) => void;
     droppedCards: number[];
     setDroppedCards: (droppedCards: number[]) => void;
+    myCards: number[];
+    setMyCards: (myCards: number[]) => void;
     currentPick: number;
     setCurrentPick: (currentPick: number) => void;
     addCardToDroppedCards: (cardId: number) => void;
+    undoCard: (cardId: number) => void;
 }
 
 export const DragAndDropContext = createContext<DragAndDropContextType | null >(null);
@@ -19,9 +22,16 @@ const DragAndDropProvider: FC<PropsWithChildren> = ({ children }) => {
     const [draggedCard, setDraggedCard] = useState<number|null>(null);
     const [droppedCards, setDroppedCards] = useState<number[]>([]);
     const [currentPick, setCurrentPick] = useState(0);
+    const [myCards, setMyCards] = useState<number[]>([]);
 
     const addCardToDroppedCards = (cardId: number) => {
         setDroppedCards([...droppedCards, cardId]);
+        setMyCards(myCards.filter((card) => card !== cardId));
+    };
+
+    const undoCard = (cardId: number) => {
+        setDroppedCards(droppedCards.filter((card) => card !== cardId));
+        setMyCards([...myCards, cardId]);
     };
 
     const value = useMemo(() => ({
@@ -33,8 +43,11 @@ const DragAndDropProvider: FC<PropsWithChildren> = ({ children }) => {
         setDroppedCards,
         currentPick,
         setCurrentPick,
-        addCardToDroppedCards
-    }), [isDragging, draggedCard, droppedCards, currentPick]);
+        myCards,
+        setMyCards,
+        addCardToDroppedCards,
+        undoCard
+    }), [isDragging, draggedCard, droppedCards, currentPick, myCards]);
 
     return (
         <DragAndDropContext.Provider value={value}>
