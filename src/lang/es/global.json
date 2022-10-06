@@ -31,5 +31,6 @@
     "language": "Idioma",
     "invalidshortcode": "Código de sala inválido",
     "alreadyingame": "Ya estás en un juego",
-    "minplayers": "El juego necesita al menos 3 jugadores"
+    "minplayers": "El juego necesita al menos 3 jugadores",
+    "drophere": "Arrastrá las cartas acá"
 }

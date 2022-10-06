@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import { DndContext, DragStartEvent } from '@dnd-kit/core';
 
 import { Game as GameType, Player } from '../types/game';
 import { useAuthContext } from '../context/AuthContext';
@@ -10,6 +11,7 @@ import { db } from '../firebase/Firestore';
 import BottomContainer from '../components/Game/BottomContainer';
 import TopContainer from '../components/Game/TopContainer';
 import SpinningWheel from '../components/common/SpinningWheel';
+import { useDragAndDropContext } from '../context/DragAndDropContext';
 
 interface GameProps {
 
@@ -19,6 +21,7 @@ const Game: FC<GameProps> = () => {
     const { id } = useParams<{id: string}>();
     const { user } = useAuthContext();
     const navigate = useNavigate();
+    const { setIsDragging, setDraggedCard } = useDragAndDropContext();
     const { t } = useTranslation('global');
 
     const [game, setGame] = useState<GameType>({} as GameType);
@@ -64,16 +67,24 @@ const Game: FC<GameProps> = () => {
         );
     }
 
-    return (
-        <div className='flex h-auto min-h-screen w-full flex-col'>
-            <div className='w-full flex-1 py-2'>
-                <TopContainer currentBlackCard={game.currentBlackCard} lang={game.lang} />
-            </div>
+    const handleDragStart = (e: DragStartEvent) => {
+        setIsDragging(true);
 
-            <div className='flex-1'>
-                <BottomContainer cards={myCards} lang={game.lang} />
+        setDraggedCard(Number(e.active.id));
+    };
+
+    return (
+        <DndContext onDragStart={(e) => handleDragStart(e)} >
+            <div className='flex h-auto min-h-screen w-full flex-col'>
+                <div className='w-full flex-1 py-2'>
+                    <TopContainer currentBlackCard={game.currentBlackCard} lang={game.lang} />
+                </div>
+
+                <div className='flex-1'>
+                    <BottomContainer cards={myCards} lang={game.lang} />
+                </div>
             </div>
-        </div>
+        </DndContext>
     );
 };
 

@@ -20,6 +20,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import i18n from './lang/i18n';
 import Lobby from './pages/Lobby';
 import Game from './pages/Game';
+import DragAndDropProvider from './context/DragAndDropContext';
 
 const isDark = window.localStorage.getItem('theme') === 'dark';
 const lang = window.localStorage.getItem('lang') || 'es';
@@ -62,7 +63,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/game/:id',
-                element: <Game />
+                element: <DragAndDropProvider><Game /></DragAndDropProvider>
             },
             {
                 path: '/',
