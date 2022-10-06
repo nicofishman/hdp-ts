@@ -25,7 +25,7 @@ const Lobby: FC<LobbyProps> = () => {
 
     useEffect(() => {
         const unsuscribe = onSnapshot(doc(db, `Games/${id}`), (snapshot) => {
-            const data = snapshot.data();
+            const data = snapshot.data() as Omit<Game, 'id'>;
 
             if (!data) return;
 

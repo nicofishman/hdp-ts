@@ -41,3 +41,14 @@ export const shuffleCards = (lang: Languages, color: 'Black' | 'White', sentCard
 
     return cardsToReturn;
 };
+
+export const getCardById = (id: number, lang: Languages): Card & { color: 'white' | 'black' } => {
+    const cardsLang = lang === 'es' ? cartasEs : cartasEn;
+    const cardsToUse: Card[] = lang === 'es' ? cartasEs.whiteCards.concat(cartasEs.blackCards) : cartasEn.whiteCards.concat(cartasEn.blackCards);
+    const card: Card = cardsToUse.find(c => c.id === id)!;
+
+    return {
+        ...card,
+        color: cardsLang.whiteCards.map(c => c.id).includes(card.id) ? 'white' : 'black'
+    };
+};
