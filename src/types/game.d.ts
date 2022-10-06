@@ -15,7 +15,7 @@ export interface Game {
     lang: Languages;
     owner: string;
     players: Player[];
-    sentCards: number[];
+    sentCards: { playerId: string, cards: number[] }[];
     shortCode: string;
     usedCards: number[];
     currentBlackCard: number | null;

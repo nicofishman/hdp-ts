@@ -180,10 +180,12 @@ export const startGame = async (gameId: string) => {
     const newPlayers: Player[] = [];
     const usedCards: number[] = gameData.usedCards;
 
-    gameData.players.forEach(player => {
-        const playerCards = shuffleCards(gameData.lang, usedCards, WHITE_CARDS_PER_PLAYER);
+    const currentBlackCard = shuffleCards(gameData.lang, 'Black', usedCards, 1)[0];
 
-        console.log('playerCards', player.displayName, playerCards);
+    usedCards.push(currentBlackCard);
+
+    gameData.players.forEach(player => {
+        const playerCards = shuffleCards(gameData.lang, 'White', usedCards, WHITE_CARDS_PER_PLAYER);
 
         newPlayers.push({
             ...player,
@@ -195,6 +197,7 @@ export const startGame = async (gameId: string) => {
 
     await updateDoc(gameRef, {
         players: newPlayers,
+        currentBlackCard,
         isStarted: true,
         usedCards
     });
