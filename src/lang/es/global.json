@@ -32,5 +32,7 @@
     "invalidshortcode": "Código de sala inválido",
     "alreadyingame": "Ya estás en un juego",
     "minplayers": "El juego necesita al menos 3 jugadores",
-    "drophere": "Arrastrá las cartas acá"
+    "drophere": "Arrastrá las cartas acá",
+    "cardsorder": "El orden de las cartas importa!",
+    "youarehdp": "Sos el hdp, esperá a que los jugadores manden sus cartas"
 }

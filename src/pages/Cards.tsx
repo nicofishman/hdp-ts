@@ -18,14 +18,14 @@ const Cards: FC<CardsProps> = ({ lang = 'es' }) => {
             {
                 cartas.blackCards.map((carta, index) => {
                     return (
-                        <Card key={index} bgColor={'black'} text={carta.text} />
+                        <Card key={index} bgColor={'black'} id={carta.id} text={carta.text} />
                     );
                 })
             }
             {
                 cartas.whiteCards.map((carta, index) => {
                     return (
-                        <Card key={index} bgColor={'white'} text={carta.text} />
+                        <Card key={index} bgColor={'white'} id={carta.id} text={carta.text} />
                     );
                 })
             }

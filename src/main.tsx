@@ -21,6 +21,7 @@ import i18n from './lang/i18n';
 import Lobby from './pages/Lobby';
 import Game from './pages/Game';
 import DragAndDropProvider from './context/DragAndDropContext';
+import GameProvider from './context/GameContext';
 
 const isDark = window.localStorage.getItem('theme') === 'dark';
 const lang = window.localStorage.getItem('lang') || 'es';
@@ -63,7 +64,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/game/:id',
-                element: <DragAndDropProvider><Game /></DragAndDropProvider>
+                element: <DragAndDropProvider><GameProvider><Game /></GameProvider></DragAndDropProvider>
             },
             {
                 path: '/',

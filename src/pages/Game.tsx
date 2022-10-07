@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { toast } from 'react-toastify';
@@ -12,6 +12,7 @@ import BottomContainer from '../components/Game/BottomContainer';
 import TopContainer from '../components/Game/TopContainer';
 import SpinningWheel from '../components/common/SpinningWheel';
 import { useDragAndDropContext } from '../context/DragAndDropContext';
+import { useGameContext } from '../context/GameContext';
 
 interface GameProps {
 
@@ -23,8 +24,7 @@ const Game: FC<GameProps> = () => {
     const navigate = useNavigate();
     const { setIsDragging, setDraggedCard, myCards, setMyCards } = useDragAndDropContext();
     const { t } = useTranslation('global');
-
-    const [game, setGame] = useState<GameType>({} as GameType);
+    const { game, setGame } = useGameContext();
 
     useEffect(() => {
         if (!user) return;
@@ -73,8 +73,8 @@ const Game: FC<GameProps> = () => {
     };
 
     return (
-        <DndContext onDragStart={(e) => handleDragStart(e)} >
-            <div className='flex h-auto min-h-screen w-full flex-col'>
+        <DndContext onDragStart={(e) => handleDragStart(e)}>
+            <div className='flex h-fit min-h-screen w-full flex-col divide-y divide-gray-500 md:h-screen'>
                 <div className='w-full flex-1 py-2'>
                     <TopContainer currentBlackCard={game.currentBlackCard} lang={game.lang} />
                 </div>

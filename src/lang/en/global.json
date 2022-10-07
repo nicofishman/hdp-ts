@@ -31,5 +31,7 @@
     "invalidshortcode": "Invalid game code",
     "alreadyingame": "You are already in a game",
     "minplayers": "Minimum number of players not reached",
-    "drophere": "Drop your cards here!"
+    "drophere": "Drop your cards here!",
+    "cardsorder": "Cards order matter!",
+    "youarehdp": "You are the hdp, wait for players to send their cards"
 }
