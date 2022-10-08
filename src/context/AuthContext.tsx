@@ -107,7 +107,6 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     const changeDisplayName = async (displayName: string) => {
         if (!auth.currentUser) return;
         await updateProfile(auth.currentUser, { displayName });
-        console.log('Nombre de usuario cambiado', auth.currentUser.displayName);
 
         setUser(auth.currentUser);
     };
@@ -115,7 +114,6 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     const logOut = async () => {
         await auth.signOut();
         setUser({} as User);
-        console.log('logged out');
     };
 
     const value: AuthContextType = useMemo(() => ({

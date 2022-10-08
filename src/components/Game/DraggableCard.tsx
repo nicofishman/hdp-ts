@@ -13,7 +13,10 @@ interface DraggableCardProps {
 
 const DraggableCard: FC<DraggableCardProps> = ({ bgColor, text, style }) => {
     return (
-        <DragOverlay modifiers={[restrictToWindowEdges]} style={style}>
+        <DragOverlay dropAnimation={{
+            duration: 500,
+            easing: 'cubic-bezier(0.18, 0.67, 0.6, 1.22)'
+        }} modifiers={[restrictToWindowEdges]} style={style}>
             <div className={clsx('shadow-my-card relative mr-0.5 mb-0.5 h-60 w-40 min-w-[160px] cursor-grabbing select-none break-words rounded-md border-[1px] border-black p-2 text-center transition-transform duration-200',
                 bgColor === 'white' ? ('bg-white text-black') : ('bg-black text-white')
             )}>

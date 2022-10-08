@@ -87,6 +87,7 @@ export const createGame = async (user: User, lang: Languages, navigate: Navigate
         isStarted: false,
         sentCards: [],
         usedCards: [],
+        usedBlackCards: [],
         currentBlackCard: null,
         lang,
         shortCode
@@ -121,15 +122,6 @@ export const removePlayerFromGame = async (player: Player, gameId: string) => {
 };
 
 export const joinGame = async (user: User, shortCode: string, navigate: NavigateFunction, t: TFunction<'global'>) => {
-    // if (shortCode.length !== 6) {
-    //     toast(t('invalidshortcode'), {
-    //         type: 'error',
-    //         containerId: 'A',
-    //         theme: 'colored',
-    //         autoClose: 3000
-    //     });
-    //     toast.clearWaitingQueue();
-    // }
     const game = await getGameByShortCode(shortCode);
 
     if (!game || !game?.id) {
@@ -181,8 +173,9 @@ export const startGame = async (gameId: string) => {
     const usedCards: number[] = gameData.usedCards;
 
     const currentBlackCard = shuffleCards(gameData.lang, 'Black', usedCards, 1)[0];
+    const usedBlackCards: number[] = [];
 
-    usedCards.push(currentBlackCard);
+    usedBlackCards.push(currentBlackCard);
 
     gameData.players.forEach(player => {
         const playerCards = shuffleCards(gameData.lang, 'White', usedCards, WHITE_CARDS_PER_PLAYER);
@@ -199,6 +192,7 @@ export const startGame = async (gameId: string) => {
         players: newPlayers,
         currentBlackCard,
         isStarted: true,
-        usedCards
+        usedCards,
+        usedBlackCards
     });
 };

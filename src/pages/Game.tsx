@@ -24,7 +24,7 @@ const Game: FC<GameProps> = () => {
     const navigate = useNavigate();
     const { setIsDragging, setDraggedCard, myCards, setMyCards } = useDragAndDropContext();
     const { t } = useTranslation('global');
-    const { game, setGame } = useGameContext();
+    const { game, setGame, setSentCards } = useGameContext();
 
     useEffect(() => {
         if (!user) return;
@@ -54,6 +54,7 @@ const Game: FC<GameProps> = () => {
             }
 
             setGame({ id, ...data } as GameType);
+            setSentCards(data.sentCards);
             setMyCards(data.players.find((p: Player) => p.id === user.uid)?.cards || []);
         });
 

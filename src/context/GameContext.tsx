@@ -5,15 +5,20 @@ import { Game as GameType } from '../types/game';
 interface GameContextType {
     game: GameType;
     setGame: (game: GameType) => void;
+    sentCards: {playerId: string; cards: number[]}[];
+    setSentCards: (sentCards: {playerId: string; cards: number[]}[]) => void;
 }
 
 export const GameContext = createContext<GameContextType | null >(null);
 
 const GameProvider: FC<PropsWithChildren> = ({ children }) => {
     const [game, setGame] = useState({} as GameType);
+    const [sentCards, setSentCards] = useState<{playerId: string; cards: number[]}[]>([]);
     const value: GameContextType = {
         game,
-        setGame
+        setGame,
+        sentCards,
+        setSentCards
     };
 
     return (

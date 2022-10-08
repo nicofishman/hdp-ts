@@ -18,13 +18,14 @@ export interface Game {
     sentCards: { playerId: string, cards: number[] }[];
     shortCode: string;
     usedCards: number[];
+    usedBlackCards: number[];
     currentBlackCard: number | null;
 }
 
 export interface Card {
     id: number;
     text: string;
-    color: string;
+    color: 'white' | 'black';
     extension: string | number;
     pick?: number
 }

@@ -1,4 +1,5 @@
 import React, { FC, useEffect } from 'react';
+import { RiSendPlaneFill } from 'react-icons/ri';
 
 import { useAuthContext } from '../../context/AuthContext';
 import { useDragAndDropContext } from '../../context/DragAndDropContext';
@@ -6,6 +7,7 @@ import { useGameContext } from '../../context/GameContext';
 import { Languages } from '../../lang/i18n';
 import { getCardById } from '../../utils/game';
 import Card from '../Card';
+import Button from '../common/Button';
 
 import DroppableSection from './DroppableSection';
 
@@ -27,9 +29,16 @@ const TopContainer: FC<TopContainerProps> = ({ currentBlackCard, lang }) => {
     }, [currentBlackCard]);
 
     return (
-        <div className='flex h-full w-full flex-wrap items-center justify-center gap-8'>
-            <Card bgColor={blackCard.color} draggable={false} id={blackCard.id} text={blackCard.text}/>
-            <DroppableSection lang={lang} numberOfCards={isHDP ? game.players.length : blackCard.pick}/>
+        <div className="flex h-full w-full flex-col justify-center">
+            <div className='flex w-full flex-row flex-wrap items-center justify-center gap-8'>
+                <Card bgColor={blackCard.color} draggable={false} id={blackCard.id} text={blackCard.text}/>
+                <DroppableSection lang={lang} numberOfCards={isHDP ? game.players.length : blackCard.pick}/>
+            </div>
+            <div className='flex w-full justify-center'>
+                <Button className='mt-4 ml-[-16px] aspect-square p-3'>
+                    <RiSendPlaneFill size={25}/>
+                </Button>
+            </div>
         </div>
     );
 };

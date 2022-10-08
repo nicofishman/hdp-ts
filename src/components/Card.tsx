@@ -7,13 +7,13 @@ import { useDragAndDropContext } from '../context/DragAndDropContext';
 import { Languages } from '../lang/i18n';
 import mono from '../public/img/Mono.png';
 import { getCardById } from '../utils/game';
+import { Card as CardType } from '../types/game';
 
 import DraggableCard from './Game/DraggableCard';
 
 interface CardProps {
-    bgColor?: 'black' | 'white';
+    bgColor?: CardType['color'];
     text?: string;
-    calledBy?: 'top' | 'bottom';
     id: number;
     lang?: Languages
     draggable?: boolean

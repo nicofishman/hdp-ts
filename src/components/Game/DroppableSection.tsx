@@ -18,7 +18,7 @@ interface DroppableSectionProps extends HTMLAttributes<HTMLDivElement> {
 const DroppableSection: FC<DroppableSectionProps> = ({ className, lang, numberOfCards = 1, ...props }) => {
     const { droppedCards, addCardToDroppedCards, setDraggedCard, setIsDragging, undoCard } = useDragAndDropContext();
     const { t } = useTranslation('global');
-    const { game } = useGameContext();
+    const { game, sentCards } = useGameContext();
     const { user } = useAuthContext();
     const isHDP = game.players.filter(p => p.id === user.uid)[0].isHdp;
 
@@ -43,7 +43,7 @@ const DroppableSection: FC<DroppableSectionProps> = ({ className, lang, numberOf
     const width = numberOfCards ? (numberOfCards * 40) + (numberOfCards * 4) : 40;
 
     return (
-        <div className={clsx('flex h-64 border-spacing-5 items-center justify-center gap-4 rounded-md border-[3px] border-dashed border-gray-500 py-2 px-4 transition-colors dark:border-gray-400', isOver && 'border-lime-500 dark:border-lime-500', className)} style={{ width: `${width * 4}px` }} {...props} ref={setNodeRef}>
+        <div className={clsx('flex h-64 border-spacing-5 items-center justify-center gap-4 rounded-md border-[3px] border-dashed border-gray-500 py-2 px-4 text-center transition-colors dark:border-gray-400', isOver && 'border-lime-500 dark:border-lime-500', className)} style={{ width: `${width * 4}px` }} {...props} ref={setNodeRef}>
 
             {!isHDP
                 ? (droppedCards.length === 0 && (
@@ -59,6 +59,7 @@ const DroppableSection: FC<DroppableSectionProps> = ({ className, lang, numberOf
                 : (
                     <div className='flex flex-col items-center justify-center gap-2'>
                         <span className='font-bold'>{t('youarehdp')}</span>
+                        <span>{sentCards.length} / {game.players.length - 1}</span>
                     </div>
                 )}
             {
