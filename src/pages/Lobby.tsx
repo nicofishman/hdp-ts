@@ -9,7 +9,7 @@ import SpinningWheel from '../components/common/SpinningWheel';
 import PlayersCard from '../components/Lobby/PlayersCard';
 import ShortCodeCard from '../components/Lobby/ShortCodeCard';
 import { useAuthContext } from '../context/AuthContext';
-import { db, startGame } from '../firebase/Firestore';
+import { Firestore } from '../firebase/Firestore';
 import { Game, Player } from '../types/game';
 
 interface LobbyProps {
@@ -24,7 +24,7 @@ const Lobby: FC<LobbyProps> = () => {
     const { t } = useTranslation('global');
 
     useEffect(() => {
-        const unsuscribe = onSnapshot(doc(db, `Games/${id}`), (snapshot) => {
+        const unsuscribe = onSnapshot(doc(Firestore.db, `Games/${id}`), (snapshot) => {
             const data = snapshot.data() as Omit<Game, 'id'>;
 
             if (!data) return;
@@ -68,7 +68,7 @@ const Lobby: FC<LobbyProps> = () => {
                 pauseOnHover: false
             });
         } else {
-            startGame(game.id);
+            Firestore.startGame(game.id);
         }
     };
 

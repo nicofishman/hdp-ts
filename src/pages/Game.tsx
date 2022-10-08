@@ -7,7 +7,7 @@ import { DndContext, DragStartEvent } from '@dnd-kit/core';
 
 import { Game as GameType, Player } from '../types/game';
 import { useAuthContext } from '../context/AuthContext';
-import { db } from '../firebase/Firestore';
+import { Firestore } from '../firebase/Firestore';
 import BottomContainer from '../components/Game/BottomContainer';
 import TopContainer from '../components/Game/TopContainer';
 import SpinningWheel from '../components/common/SpinningWheel';
@@ -28,7 +28,7 @@ const Game: FC<GameProps> = () => {
 
     useEffect(() => {
         if (!user) return;
-        const unsuscribe = onSnapshot(doc(db, `Games/${id}`), (snapshot) => {
+        const unsuscribe = onSnapshot(doc(Firestore.db, `Games/${id}`), (snapshot) => {
             const data = snapshot.data() as Omit<GameType, 'id'>;
 
             if (!data) return;

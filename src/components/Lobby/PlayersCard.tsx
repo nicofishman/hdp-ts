@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React, { FC } from 'react';
 import { FaTrash } from 'react-icons/fa';
 
-import { removePlayerFromGame } from '../../firebase/Firestore';
+import { Firestore } from '../../firebase/Firestore';
 import { Player } from '../../types/game';
 import Container from '../common/Container';
 
@@ -26,7 +26,7 @@ const PlayersCard: FC<PlayersCardProps> = ({ players, gameOwner, userId, gameId 
                                     <span className='font-main text-2xl'>👑</span>
                                 )}
                                 {gameOwner === userId && gameOwner !== p.id && (
-                                    <FaTrash className='cursor-pointer fill-red-700 dark:fill-red-500' size={20} onClick={() => removePlayerFromGame(p, gameId)} />
+                                    <FaTrash className='cursor-pointer fill-red-700 dark:fill-red-500' size={20} onClick={() => Firestore.removePlayerFromGame(p, gameId)} />
                                 )}
                             </div>
                         </div>

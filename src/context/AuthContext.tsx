@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 import FirebaseErrors from '../firebase/Errors';
 import { FirebaseApp } from '../firebase/FirebaseApp';
-import { setUserDB } from '../firebase/Firestore';
+import { Firestore } from '../firebase/Firestore';
 
 interface AuthContextType {
     mySignInWithEmailAndPassword : (email: string, password: string) => Promise<void>;
@@ -73,7 +73,7 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
                             displayName: email.split('@')[0]
                         }).then(() => {
                             if (!auth.currentUser) return;
-                            setUserDB(auth.currentUser);
+                            Firestore.setUserDB(auth.currentUser);
                         })
                             .then(() => {
                                 setLoading(false);

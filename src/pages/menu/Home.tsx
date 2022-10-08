@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
 import { useAuthContext } from '../../context/AuthContext';
-import { createGame, joinGame } from '../../firebase/Firestore';
+import { Firestore } from '../../firebase/Firestore';
 
 interface HomeProps {
 
@@ -32,7 +32,7 @@ const Home: FC<HomeProps> = () => {
 
             return;
         }
-        createGame(user, window.localStorage.getItem('lang') === 'en' ? 'en' : 'es', navigate);
+        Firestore.createGame(user, window.localStorage.getItem('lang') === 'en' ? 'en' : 'es', navigate);
     };
 
     const handleSearchGameClick = () => {
@@ -46,7 +46,7 @@ const Home: FC<HomeProps> = () => {
             });
             toast.clearWaitingQueue();
         }
-        joinGame(user, searchGameRef.current?.value.toUpperCase() || '', navigate, t);
+        Firestore.joinGame(user, searchGameRef.current?.value.toUpperCase() || '', navigate, t);
     };
 
     return (
