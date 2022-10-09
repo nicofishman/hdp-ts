@@ -1,26 +1,36 @@
 import React, { createContext, FC, PropsWithChildren, useContext, useMemo, useState } from 'react';
 
+import { Game as GameType } from '../types/game';
+
 interface DragAndDropContextType {
     isDragging: boolean;
     setIsDragging: (isDragging: boolean) => void;
-    draggedCard: number | null;
-    setDraggedCard: (draggedCard: number | null) => void;
+    draggedCards: number[] | null;
+    setDraggedCards: (draggedCards: number[] | null) => void;
     droppedCards: number[];
     setDroppedCards: (droppedCards: number[]) => void;
+    hdpSentCards: GameType['sentCards'];
+    setHdpSentCards: (hdpDroppedCards: GameType['sentCards']) => void;
+    hdpDroppedCards: GameType['sentCards'];
+    setHdpDroppedCards: (hdpDroppedCards: GameType['sentCards']) => void;
     myCards: number[];
     setMyCards: (myCards: number[]) => void;
     currentPick: number;
     setCurrentPick: (currentPick: number) => void;
     addCardToDroppedCards: (cardId: number) => void;
     undoCard: (cardId: number) => void;
+    undoCardHdp: (playerId: string) => void;
+    addCardsToHdpDroppedCards: (cards: GameType['sentCards']) => void;
 }
 
 export const DragAndDropContext = createContext<DragAndDropContextType | null >(null);
 
 const DragAndDropProvider: FC<PropsWithChildren> = ({ children }) => {
     const [isDragging, setIsDragging] = useState(false);
-    const [draggedCard, setDraggedCard] = useState<number|null>(null);
+    const [draggedCards, setDraggedCards] = useState<number[]|null>(null);
     const [droppedCards, setDroppedCards] = useState<number[]>([]);
+    const [hdpSentCards, setHdpSentCards] = useState<GameType['sentCards']>([]);
+    const [hdpDroppedCards, setHdpDroppedCards] = useState<GameType['sentCards']>([]);
     const [currentPick, setCurrentPick] = useState(0);
     const [myCards, setMyCards] = useState<number[]>([]);
 
@@ -29,25 +39,41 @@ const DragAndDropProvider: FC<PropsWithChildren> = ({ children }) => {
         setMyCards(myCards.filter((card) => card !== cardId));
     };
 
+    const addCardsToHdpDroppedCards = (c: GameType['sentCards']) => {
+        setHdpDroppedCards([...hdpDroppedCards, c[0]]);
+        setHdpSentCards(hdpSentCards.filter((card) => card.playerId !== c[0].playerId));
+    };
+
     const undoCard = (cardId: number) => {
         setDroppedCards(droppedCards.filter((card) => card !== cardId));
         setMyCards([...myCards, cardId]);
     };
 
+    const undoCardHdp = (playerId: string) => {
+        setHdpDroppedCards(hdpDroppedCards.filter((card) => card.playerId !== playerId));
+        setHdpSentCards([...hdpSentCards, hdpDroppedCards.filter((card) => card.playerId === playerId)[0]]);
+    };
+
     const value = useMemo(() => ({
         isDragging,
         setIsDragging,
-        draggedCard,
-        setDraggedCard,
+        draggedCards,
+        setDraggedCards,
         droppedCards,
         setDroppedCards,
+        hdpSentCards,
+        setHdpSentCards,
+        hdpDroppedCards,
+        setHdpDroppedCards,
         currentPick,
         setCurrentPick,
         myCards,
         setMyCards,
         addCardToDroppedCards,
-        undoCard
-    }), [isDragging, draggedCard, droppedCards, currentPick, myCards]);
+        undoCard,
+        undoCardHdp,
+        addCardsToHdpDroppedCards
+    }), [isDragging, draggedCards, droppedCards, currentPick, myCards, hdpSentCards, hdpDroppedCards]);
 
     return (
         <DragAndDropContext.Provider value={value}>

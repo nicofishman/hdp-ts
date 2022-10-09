@@ -4,6 +4,13 @@ import cartasEs from '../public/cartas/es.json';
 import { Card } from '../types/game';
 const characters = 'CDEFHJKMNPRTVWXY23456789';
 
+interface JSONCards {
+    [key: string]: Card[];
+}
+
+const CARTAS_EN = cartasEn as unknown as JSONCards;
+const CARTAS_ES = cartasEs as unknown as JSONCards;
+
 export const generateShortCode = () => {
     const rand = new Uint32Array(1);
 
@@ -23,9 +30,7 @@ export const generateShortCode = () => {
 };
 
 export const shuffleCards = (lang: Languages, color: 'Black' | 'White', sentCards: number[], cardsPerPlayer: number) => {
-    const cards: { whiteCards: Card[], blackCards: Card[] } = lang === 'es' ? cartasEs : cartasEn;
-
-    console.log(sentCards);
+    const cards = lang === 'es' ? CARTAS_ES : CARTAS_EN;
 
     const colorplusCards = color === 'Black' ? cards.blackCards : cards.whiteCards;
 
@@ -43,12 +48,31 @@ export const shuffleCards = (lang: Languages, color: 'Black' | 'White', sentCard
 };
 
 export const getCardById = (id: number, lang: Languages): Card & { color: 'white' | 'black' } => {
-    const cardsLang = lang === 'es' ? cartasEs : cartasEn;
-    const cardsToUse: Card[] = lang === 'es' ? cartasEs.whiteCards.concat(cartasEs.blackCards) : cartasEn.whiteCards.concat(cartasEn.blackCards);
+    const cardsLang = lang === 'es' ? CARTAS_ES : CARTAS_EN;
+    const cardsToUse = lang === 'es' ? CARTAS_ES.whiteCards.concat(CARTAS_ES.blackCards) : CARTAS_EN.whiteCards.concat(CARTAS_EN.blackCards);
     const card: Card = cardsToUse.find(c => c.id === id)!;
 
     return {
         ...card,
         color: cardsLang.whiteCards.map(c => c.id).includes(card.id) ? 'white' : 'black'
     };
+};
+
+export const createHashFromToCards = (cards: number[]) => {
+    return cards.join('-');
+};
+
+export const decodeHash = (hash: string) => {
+    return hash.split('-').map(c => parseInt(c));
+};
+
+export const getCardsFromHash = (hash: string, lang: Languages) => {
+    const cardIds = hash.split('-').map(c => parseInt(c));
+    const cards: Card[] = [];
+
+    cardIds.forEach(id => {
+        cards.push(getCardById(id, lang));
+    });
+
+    return cards;
 };

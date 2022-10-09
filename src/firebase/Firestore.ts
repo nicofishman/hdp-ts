@@ -80,7 +80,8 @@ export class Firestore {
                 id: user.uid,
                 displayName: user.displayName,
                 isHdp: true,
-                points: 0
+                points: 0,
+                cards: []
             }],
             currentRound: 1, // Para poner el currentHDP se hace //? players[currentRound % players.length].isHdp = true
             owner: user.uid,
@@ -194,6 +195,30 @@ export class Firestore {
             isStarted: true,
             usedCards,
             usedBlackCards
+        });
+    };
+
+    static sendCards = async (gameId: string, playerId: string, cards: number[]) => {
+        const gameRef = doc(Firestore.gamesRef, gameId);
+        const gameData = await getDoc(gameRef).then(g => g.data()) as Game;
+
+        const newPlayers = gameData.players.map(player => {
+            if (player.id === playerId) {
+                return {
+                    ...player,
+                    cards: player.cards.filter(card => !cards.includes(card))
+                };
+            } else {
+                return player;
+            }
+        });
+
+        await updateDoc(gameRef, {
+            players: newPlayers,
+            sentCards: arrayUnion({
+                playerId,
+                cards
+            })
         });
     };
 }

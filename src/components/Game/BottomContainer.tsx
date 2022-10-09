@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 
 import { useAuthContext } from '../../context/AuthContext';
 import { useDragAndDropContext } from '../../context/DragAndDropContext';
@@ -7,20 +7,28 @@ import { Languages } from '../../lang/i18n';
 import { getCardById } from '../../utils/game';
 import Card from '../Card';
 
+import StackedCards from './StackedCards';
+
 interface BottomContainersProps {
     cards: number[];
     lang: Languages
 };
 
 const BottomContainer: FC<BottomContainersProps> = ({ cards, lang }) => {
-    const { currentPick, droppedCards } = useDragAndDropContext();
+    const { currentPick, droppedCards, hdpSentCards, setHdpSentCards, hdpDroppedCards } = useDragAndDropContext();
 
     const { game } = useGameContext();
     const { user } = useAuthContext();
 
     const isHDP = game.players.filter(p => p.id === user.uid)[0].isHdp;
 
-    console.log(isHDP, user.displayName);
+    const allPlayerSentTheirCards = game.sentCards.length === game.players.length - 1;
+
+    useEffect(() => {
+        if (isHDP && allPlayerSentTheirCards && hdpDroppedCards.length === 0) {
+            setHdpSentCards(game.sentCards);
+        }
+    }, []);
 
     return (
         <div className='mt-5 flex w-full flex-row flex-wrap justify-center gap-2'>
@@ -41,8 +49,20 @@ const BottomContainer: FC<BottomContainersProps> = ({ cards, lang }) => {
 
                         );
                     }))
-                    : (
-                        <h1>SOS EL HDP</h1>
+                    : allPlayerSentTheirCards && (
+                        hdpSentCards.map((c) => (
+                            <div key={c.playerId} className='relative flex h-64 w-40 flex-col'>
+                                { c.cards.length === 1
+                                    ? (
+                                        <Card bgColor={getCardById(c.cards[0], lang).color} draggable={hdpDroppedCards.length === 0} id={getCardById(c.cards[0], lang).id} playerId={c.playerId} text={getCardById(c.cards[0], lang).text}/>
+                                    )
+                                    : (
+                                        <StackedCards cards={c.cards} draggable={hdpDroppedCards.length === 0} lang={lang} playerId={c.playerId}/>
+
+                                    )
+                                }
+                            </div>
+                        ))
                     )
             }
         </div>

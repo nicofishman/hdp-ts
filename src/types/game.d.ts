@@ -5,7 +5,7 @@ export interface Player {
     id: string;
     isHdp: boolean;
     points: number;
-    cards?: number[];
+    cards: number[];
 }
 
 export interface Game {

@@ -13,6 +13,7 @@ import TopContainer from '../components/Game/TopContainer';
 import SpinningWheel from '../components/common/SpinningWheel';
 import { useDragAndDropContext } from '../context/DragAndDropContext';
 import { useGameContext } from '../context/GameContext';
+import { decodeHash } from '../utils/game';
 
 interface GameProps {
 
@@ -22,9 +23,9 @@ const Game: FC<GameProps> = () => {
     const { id } = useParams<{id: string}>();
     const { user } = useAuthContext();
     const navigate = useNavigate();
-    const { setIsDragging, setDraggedCard, myCards, setMyCards } = useDragAndDropContext();
+    const { setIsDragging, setDraggedCards, myCards, setMyCards } = useDragAndDropContext();
     const { t } = useTranslation('global');
-    const { game, setGame, setSentCards } = useGameContext();
+    const { game, setGame, setSentCards, setHasSentCards } = useGameContext();
 
     useEffect(() => {
         if (!user) return;
@@ -52,7 +53,9 @@ const Game: FC<GameProps> = () => {
 
                 return;
             }
-
+            if (data.sentCards.map(st => st.playerId).includes(user.uid)) {
+                setHasSentCards(true);
+            }
             setGame({ id, ...data } as GameType);
             setSentCards(data.sentCards);
             setMyCards(data.players.find((p: Player) => p.id === user.uid)?.cards || []);
@@ -70,7 +73,7 @@ const Game: FC<GameProps> = () => {
     const handleDragStart = (e: DragStartEvent) => {
         setIsDragging(true);
 
-        setDraggedCard(Number(e.active.id));
+        setDraggedCards(decodeHash(e.active.id.toString()));
     };
 
     return (
