@@ -1,9 +1,11 @@
 import clsx from 'clsx';
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { RiSendPlaneFill } from 'react-icons/ri';
 import { IoMdCheckmarkCircle } from 'react-icons/io';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import { isMobile } from 'react-device-detect';
+import { MdLeaderboard } from 'react-icons/md';
 
 import { useAuthContext } from '../../context/AuthContext';
 import { useDragAndDropContext } from '../../context/DragAndDropContext';
@@ -13,8 +15,10 @@ import { Languages } from '../../lang/i18n';
 import { getCardById } from '../../utils/game';
 import Card from '../Card';
 import Button from '../common/Button';
+import PlayersCard from '../Lobby/PlayersCard';
 
 import DroppableSection from './DroppableSection';
+import PointsModal from './PointsModal';
 
 interface TopContainerProps {
     currentBlackCard: number;
@@ -22,6 +26,8 @@ interface TopContainerProps {
 };
 
 const TopContainer: FC<TopContainerProps> = ({ currentBlackCard, lang }) => {
+    const [modalOpen, setModalOpen] = useState(false);
+
     const { setCurrentPick, droppedCards, hdpDroppedCards } = useDragAndDropContext();
     const { game, hasSentCards } = useGameContext();
     const { user } = useAuthContext();
@@ -74,6 +80,15 @@ const TopContainer: FC<TopContainerProps> = ({ currentBlackCard, lang }) => {
 
     return (
         <div className="flex h-full w-full flex-col justify-center">
+            <div className='absolute top-0 m-2 aspect-square w-16'>
+
+                <Button className='aspect-square w-full' onClick={() => setModalOpen(true)}>
+                    <MdLeaderboard color="#000" size={30}/>
+                </Button>
+            </div>
+            <PointsModal open={modalOpen} setOpen={setModalOpen}>
+                <PlayersCard points gameId={game.id} gameOwner={game.owner} gamePlayers={game.players} userId={user.uid}/>
+            </PointsModal>
             <div className='flex w-full flex-row flex-wrap items-center justify-center gap-8'>
                 <Card bgColor={blackCard.color} draggable={false} id={blackCard.id} text={blackCard.text}/>
                 <DroppableSection lang={lang} numberOfCards={blackCard.pick}/>
@@ -96,6 +111,7 @@ const TopContainer: FC<TopContainerProps> = ({ currentBlackCard, lang }) => {
                     </div>
                 )
             }
+
         </div>
     );
 };

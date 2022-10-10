@@ -2,6 +2,7 @@ import { useDraggable } from '@dnd-kit/core';
 import clsx from 'clsx';
 import { CSS } from '@dnd-kit/utilities';
 import React, { FC } from 'react';
+import { isMobile } from 'react-device-detect';
 
 import { useDragAndDropContext } from '../context/DragAndDropContext';
 import { Languages } from '../lang/i18n';
@@ -20,13 +21,14 @@ interface CardProps {
     isStacked?: boolean;
     stackId?: string;
     playerId?: string;
+    onClick?: ()=> void;
 }
 
-const Card: FC<CardProps> = ({ bgColor, text, draggable = true, id, lang, isStacked = false, stackId = '', playerId = '' }) => {
+const Card: FC<CardProps> = ({ bgColor, text, draggable = true, id, lang, isStacked = false, stackId = '', playerId = '', onClick }) => {
     const { draggedCards } = useDragAndDropContext();
     const { setNodeRef, attributes, listeners, transform } = useDraggable({
         id: isStacked ? stackId : id.toString(),
-        disabled: !draggable,
+        disabled: isMobile && !draggable,
         data: {
             type: 'card',
             isStacked,
@@ -55,8 +57,8 @@ const Card: FC<CardProps> = ({ bgColor, text, draggable = true, id, lang, isStac
     return (
         <div ref={setNodeRef} className={clsx('shadow-my-card relative mr-0.5 mb-0.5 h-60 w-40 min-w-[160px] select-none break-words rounded-md border-[1px] border-black p-2 text-center transition-transform duration-200',
             bgColor === 'white' ? ('bg-white text-black') : ('cursor-default bg-black text-white'),
-            !isStacked && draggable && ('cursor-grab hover:translate-y-[-0.8em]')
-        )} {...attributes} {...listeners} role='none' style={style}>
+            !isStacked && draggable && !isMobile && ('cursor-grab hover:translate-y-[-0.8em]')
+        )} onClick={onClick} {...attributes} {...listeners} role='none' style={style}>
             <p className={'flex h-auto w-full select-none p-1 text-left font-card text-card font-bold leading-5'}>{text}</p>
             <img alt="Mono" className={clsx('absolute bottom-0 right-0 h-auto w-16')} src={mono} />
         </div>

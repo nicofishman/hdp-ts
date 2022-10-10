@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import React, { FC } from 'react';
+import { isMobile } from 'react-device-detect';
 
 import { useDragAndDropContext } from '../../context/DragAndDropContext';
 import { Languages } from '../../lang/i18n';
@@ -23,7 +24,7 @@ const StackedCards: FC<StackedCardsProps> = ({ cards, lang, draggable, playerId 
 
     return (
         <div className={clsx('relative h-full w-full transition-transform',
-            draggable && ('cursor-grab hover:translate-y-[-0.8em]')
+            draggable && !isMobile && ('cursor-grab hover:translate-y-[-0.8em]')
         )}>
             {!draggedCards?.includes(cards[0])
                 ? (cards.map((cardId: number, idx: number) => {

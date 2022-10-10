@@ -30,11 +30,11 @@ const DraggableCardStack: FC<DraggableCardStackProps> = ({ cards, draggable, sta
     };
 
     return (
-        <div ref={setNodeRef} className='h-full w-full bg-red-500' {...attributes} {...listeners} role='none'>
+        <div ref={setNodeRef} className='h-full w-full' {...attributes} {...listeners} role='none' style={style}>
             <DragOverlay dropAnimation={{
                 duration: 500,
                 easing: 'cubic-bezier(0.18, 0.67, 0.6, 1.22)'
-            }} modifiers={[restrictToWindowEdges]} style={style}>
+            }} modifiers={[restrictToWindowEdges]}>
                 {
                     cards.map((card, idx) => {
                     // const offset = index === 0 ? 'top-0' : 'top-20';

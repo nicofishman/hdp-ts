@@ -75,7 +75,7 @@ const Lobby: FC<LobbyProps> = () => {
     return game.id
         ? (
             <div className='relative mx-[10%] flex h-screen w-full min-w-[215px] flex-col items-center justify-center gap-8 sm:mx-[17%] md:mx-[15%] lg:mx-[25%] xl:mx-[35%]'>
-                <PlayersCard gameId={game.id} gameOwner={game.owner} players={game.players} userId={user.uid}/>
+                <PlayersCard gameId={game.id} gameOwner={game.owner} gamePlayers={game.players} userId={user.uid}/>
                 {
                     game.owner === user.uid && (
                         <Button className='h-10 w-1/2 min-w-[160px] text-lg' text={t('startgame')} onClick={startGameClick}/>
