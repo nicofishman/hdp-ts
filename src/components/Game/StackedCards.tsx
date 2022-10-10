@@ -4,7 +4,7 @@ import { isMobile } from 'react-device-detect';
 
 import { useDragAndDropContext } from '../../context/DragAndDropContext';
 import { Languages } from '../../lang/i18n';
-import { createHashFromToCards, getCardById } from '../../utils/game';
+import { createHashFromToCards, getCardById, getCardsFromHash } from '../../utils/game';
 import Card from '../Card';
 
 import DraggableCardStack from './DraggableCardStack';
@@ -19,6 +19,8 @@ interface StackedCardsProps {
 const StackedCards: FC<StackedCardsProps> = ({ cards, lang, draggable, playerId }) => {
     const stackId = createHashFromToCards(cards);
     const myCards = cards.map((cardId) => getCardById(cardId, lang));
+
+    console.log('StackedCards', getCardsFromHash(stackId, lang)[0].text, draggable);
 
     const { draggedCards } = useDragAndDropContext();
 
@@ -40,7 +42,7 @@ const StackedCards: FC<StackedCardsProps> = ({ cards, lang, draggable, playerId 
                     );
                 }))
                 : (
-                    <DraggableCardStack cards={myCards} draggable={false} playerId={playerId} stackId={stackId} />
+                    <DraggableCardStack cards={myCards} draggable={draggable} playerId={playerId} stackId={stackId} />
                 )}
         </div>
     );

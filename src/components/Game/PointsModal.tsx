@@ -26,7 +26,7 @@ const PointsModal: FC<PointsModalProps> = ({ open, setOpen, children }) => {
                 <div className="fixed inset-0 top-0 z-10 w-full overflow-y-auto">
                     <div className="flex h-screen w-screen items-center justify-center p-4 text-center sm:p-0">
                         <Transition.Child
-                            className='w-full max-w-3xl'
+                            className='w-full max-w-3xl px-4'
                             enter="ease-out duration-300"
                             enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                             enterTo="opacity-100 translate-y-0 sm:scale-100"

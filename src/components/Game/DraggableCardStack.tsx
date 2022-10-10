@@ -15,7 +15,7 @@ interface DraggableCardStackProps {
 };
 
 const DraggableCardStack: FC<DraggableCardStackProps> = ({ cards, draggable, stackId, playerId }) => {
-    const { setNodeRef, attributes, listeners, transform } = useDraggable({
+    const { setNodeRef, attributes, listeners, transform, activeNodeRect } = useDraggable({
         id: stackId.toString(),
         disabled: !draggable,
         data: {
@@ -26,7 +26,12 @@ const DraggableCardStack: FC<DraggableCardStackProps> = ({ cards, draggable, sta
     });
 
     const style = {
-        transform: CSS.Translate.toString(transform)
+        transform: CSS.Translate.toString({
+            x: transform && activeNodeRect ? transform.x - activeNodeRect?.left : 0,
+            y: transform && activeNodeRect ? transform.y - activeNodeRect?.top : 0,
+            scaleX: transform?.scaleX ?? 1,
+            scaleY: transform?.scaleY ?? 1
+        })
     };
 
     return (

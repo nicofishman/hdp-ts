@@ -4,7 +4,6 @@ import { RiSendPlaneFill } from 'react-icons/ri';
 import { IoMdCheckmarkCircle } from 'react-icons/io';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
-import { isMobile } from 'react-device-detect';
 import { MdLeaderboard } from 'react-icons/md';
 
 import { useAuthContext } from '../../context/AuthContext';

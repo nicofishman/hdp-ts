@@ -28,7 +28,7 @@ const Card: FC<CardProps> = ({ bgColor, text, draggable = true, id, lang, isStac
     const { draggedCards } = useDragAndDropContext();
     const { setNodeRef, attributes, listeners, transform } = useDraggable({
         id: isStacked ? stackId : id.toString(),
-        disabled: isMobile && !draggable,
+        disabled: isMobile || !draggable,
         data: {
             type: 'card',
             isStacked,
