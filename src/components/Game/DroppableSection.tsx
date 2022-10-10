@@ -61,10 +61,8 @@ const DroppableSection: FC<DroppableSectionProps> = ({ className, lang, numberOf
     const width = numberOfCards ? (numberOfCards * 40) + (numberOfCards * 4) : 40;
     const allPlayerSentTheirCards = game.sentCards.length === game.players.length - 1;
 
-    console.log('allPlayerSentTheirCards', allPlayerSentTheirCards, game.sentCards, hdpDroppedCards.length);
-
     return (
-        <div className={clsx('flex h-64 border-spacing-5 items-center justify-center rounded-md border-[3px] border-dashed border-gray-500 p-1 text-center transition-colors dark:border-gray-400', isOver && 'border-lime-500 dark:border-lime-500', currentPick > 1 && isHDP && 'h-[340px] w-72 gap-4', className)} style={{ width: `${width * 4}px` }} {...props} ref={setNodeRef}>
+        <div className={clsx('flex h-64 border-spacing-5 items-center justify-center rounded-md border-[3px] border-dashed border-gray-500 p-1 text-center transition-colors dark:border-gray-400', isOver && 'border-lime-500 dark:border-lime-500', currentPick > 1 && isHDP && 'w-96 gap-4', className)} style={{ width: `${width * 4}px` }} {...props} ref={setNodeRef}>
 
             <div className={clsx('relative flex h-full w-full items-center justify-center gap-2', isHDP ? 'flex-col' : 'flex-row')}>
 
@@ -89,11 +87,13 @@ const DroppableSection: FC<DroppableSectionProps> = ({ className, lang, numberOf
                                         )
                                         : (
                                             <>
-                                                <div className='absolute -top-1 -right-1 z-20 cursor-pointer rounded-full bg-red-500 p-1' onClick={() => undoCardHdp(hdpDroppedCards[0].playerId)}>
+                                                <div className={clsx('absolute -top-1 -right-1 z-20 cursor-pointer rounded-full bg-red-500 p-1', currentPick > 1 && 'top-1')} onClick={() => undoCardHdp(hdpDroppedCards[0].playerId)}>
                                                     <ImCancelCircle color='#fff' />
                                                 </div>
                                                 {
-                                                    <StackedCards cards={hdpDroppedCards[0].cards} draggable={false} lang={lang} playerId={hdpDroppedCards[0].playerId} />
+                                                    <div className={clsx('h-full w-full', currentPick > 1 && 'translate-x-[26%]')}>
+                                                        <StackedCards cards={hdpDroppedCards[0].cards} draggable={false} lang={lang} playerId={hdpDroppedCards[0].playerId} />
+                                                    </div>
                                                 }
                                             </>
                                         )

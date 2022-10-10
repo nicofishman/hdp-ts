@@ -31,7 +31,6 @@ export class Firestore {
     });
 
     static setUserDB = async (user: User) => {
-        console.log('dbdbdbdbdbdbbd', user.uid);
         await setDoc(doc(Firestore.db, `Users/${user.uid}`), { username: user.displayName });
     };
 
@@ -51,8 +50,6 @@ export class Firestore {
         const q = query(Firestore.gamesRef, where('shortCode', '==', shortCode));
 
         const querySnapshot = await getDocs(q);
-
-        console.log('querySnapshot', querySnapshot);
 
         querySnapshot.forEach(doc => {
             docs.push(doc.data() as Game);
@@ -96,7 +93,6 @@ export class Firestore {
 
         await setDoc(newGameRef, { id: newGameRef.id, ...newGameData })
             .then(() => {
-                console.log('GAME CREATED', newGameRef.id);
                 navigate(`lobby/${newGameRef.id}`);
             });
     };

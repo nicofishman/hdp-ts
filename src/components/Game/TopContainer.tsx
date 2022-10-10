@@ -76,7 +76,7 @@ const TopContainer: FC<TopContainerProps> = ({ currentBlackCard, lang }) => {
         <div className="flex h-full w-full flex-col justify-center">
             <div className='flex w-full flex-row flex-wrap items-center justify-center gap-8'>
                 <Card bgColor={blackCard.color} draggable={false} id={blackCard.id} text={blackCard.text}/>
-                <DroppableSection lang={lang} numberOfCards={isHDP ? 1 : blackCard.pick}/>
+                <DroppableSection lang={lang} numberOfCards={blackCard.pick}/>
             </div>
             {
                 (

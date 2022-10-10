@@ -20,7 +20,6 @@ const LogIn: FC<LogInProps> = () => {
     const logInEmailAndPassword = async () => {
         if (emailRef.current && passwordRef.current) {
             await mySignInWithEmailAndPassword(emailRef.current.value, passwordRef.current.value);
-            console.log('LogIn.tsx: logInEmailAndPassword: mySignInWithEmailAndPassword: OK');
         }
     };
 

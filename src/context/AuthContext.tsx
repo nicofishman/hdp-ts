@@ -31,8 +31,6 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 
     useEffect(() => {
         const unsuscribe = onAuthStateChanged(auth, (currentUser) => {
-            console.log('currentUser', currentUser);
-
             if (currentUser) {
                 setUser(currentUser);
                 if (currentUser.providerData[0].providerId === 'password' && auth.currentUser) {
@@ -51,7 +49,6 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 
                 setUser(user);
             }).catch((error) => {
-                console.log(error);
                 toast(error, {
                     type: 'error',
                     containerId: 'A',

@@ -60,8 +60,6 @@ const Game: FC<GameProps> = () => {
             }
 
             if (currentRound !== data.currentRound) {
-                console.log('round changed', currentRound, data.currentRound);
-
                 setDroppedCards([]);
                 setHdpDroppedCards([]);
             }
