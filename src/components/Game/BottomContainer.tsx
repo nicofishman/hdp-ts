@@ -28,7 +28,7 @@ const BottomContainer: FC<BottomContainersProps> = ({ cards, lang }) => {
         if (isHDP && allPlayerSentTheirCards && hdpDroppedCards.length === 0) {
             setHdpSentCards(game.sentCards);
         }
-    }, []);
+    }, [game.sentCards]);
 
     return (
         <div className='mt-5 flex w-full flex-row flex-wrap justify-center gap-2'>

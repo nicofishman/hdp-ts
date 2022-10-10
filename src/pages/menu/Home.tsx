@@ -56,7 +56,7 @@ const Home: FC<HomeProps> = () => {
                     <Button className='h-20 w-full text-4xl' text={t('create')} onClick={handleCreateGame} />
                 </div>
                 <div className='flex-1'>
-                    <Input className='h-20 text-4xl' endDecorator={
+                    <Input autoComplete='off' className='h-20 text-4xl' endDecorator={
                         <AiOutlineSearch className={'mt-2 h-full w-full'} onClick={handleSearchGameClick} />
                     } myRef={searchGameRef} placeholder={t('search')}/>
                 </div>

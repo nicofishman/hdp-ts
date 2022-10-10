@@ -59,23 +59,25 @@ const DroppableSection: FC<DroppableSectionProps> = ({ className, lang, numberOf
     });
 
     const width = numberOfCards ? (numberOfCards * 40) + (numberOfCards * 4) : 40;
-    const allPlayerSentTheirCards = sentCards.length === game.players.length - 1;
+    const allPlayerSentTheirCards = game.sentCards.length === game.players.length - 1;
+
+    console.log('allPlayerSentTheirCards', allPlayerSentTheirCards, game.sentCards, hdpDroppedCards.length);
 
     return (
-        <div className={clsx('flex h-64 border-spacing-5 items-center justify-center gap-4 rounded-md border-[3px] border-dashed border-gray-500 py-2 px-4 text-center transition-colors dark:border-gray-400', isOver && 'border-lime-500 dark:border-lime-500', currentPick > 1 && 'h-[340px] w-72', className)} style={{ width: !isHDP ? `${width * 4}px` : '200px' }} {...props} ref={setNodeRef}>
+        <div className={clsx('flex h-64 border-spacing-5 items-center justify-center rounded-md border-[3px] border-dashed border-gray-500 p-1 text-center transition-colors dark:border-gray-400', isOver && 'border-lime-500 dark:border-lime-500', currentPick > 1 && isHDP && 'h-[340px] w-72 gap-4', className)} style={{ width: `${width * 4}px` }} {...props} ref={setNodeRef}>
 
             <div className={clsx('relative flex h-full w-full items-center justify-center gap-2', isHDP ? 'flex-col' : 'flex-row')}>
 
                 {!isHDP
                     ? (droppedCards.length === 0 && !hasSentCards && (
-                        <>
+                        <div className='flex flex-col'>
                             <span className='font-bold'>{t('drophere')}</span>
                             {
                                 numberOfCards > 1 && (
                                     <span className='text-sm text-gray-700 dark:text-gray-500'>{t('cardsorder')}</span>
                                 )
                             }
-                        </>
+                        </div>
                     ))
                     : (
                         <>
@@ -95,7 +97,7 @@ const DroppableSection: FC<DroppableSectionProps> = ({ className, lang, numberOf
                                                 }
                                             </>
                                         )
-                                    : sentCards.length === 0 && (
+                                    : hdpDroppedCards.length === 0 && (
                                         <>
                                             <span className='font-bold'>{t('youarehdp')}</span>
                                             <span>{sentCards.length} / {game.players.length - 1}</span>
@@ -107,7 +109,7 @@ const DroppableSection: FC<DroppableSectionProps> = ({ className, lang, numberOf
                 {
                     hasSentCards
                         ? (
-                            sentCards.filter(st => st.playerId === user.uid)[0].cards.map((cardId: number) => (
+                            game.sentCards.filter(st => st.playerId === user.uid)[0].cards.map((cardId: number) => (
                                 <div key={cardId} className='relative'>
                                     {
                                         !hasSentCards && (

@@ -17,6 +17,8 @@ interface DragAndDropContextType {
     setMyCards: (myCards: number[]) => void;
     currentPick: number;
     setCurrentPick: (currentPick: number) => void;
+    currentRound: number;
+    setCurrentRound: (currentRound: number) => void;
     addCardToDroppedCards: (cardId: number) => void;
     undoCard: (cardId: number) => void;
     undoCardHdp: (playerId: string) => void;
@@ -33,6 +35,7 @@ const DragAndDropProvider: FC<PropsWithChildren> = ({ children }) => {
     const [hdpDroppedCards, setHdpDroppedCards] = useState<GameType['sentCards']>([]);
     const [currentPick, setCurrentPick] = useState(0);
     const [myCards, setMyCards] = useState<number[]>([]);
+    const [currentRound, setCurrentRound] = useState(0);
 
     const addCardToDroppedCards = (cardId: number) => {
         setDroppedCards([...droppedCards, cardId]);
@@ -67,13 +70,15 @@ const DragAndDropProvider: FC<PropsWithChildren> = ({ children }) => {
         setHdpDroppedCards,
         currentPick,
         setCurrentPick,
+        currentRound,
+        setCurrentRound,
         myCards,
         setMyCards,
         addCardToDroppedCards,
         undoCard,
         undoCardHdp,
         addCardsToHdpDroppedCards
-    }), [isDragging, draggedCards, droppedCards, currentPick, myCards, hdpSentCards, hdpDroppedCards]);
+    }), [isDragging, draggedCards, droppedCards, currentPick, myCards, hdpSentCards, hdpDroppedCards, currentRound]);
 
     return (
         <DragAndDropContext.Provider value={value}>

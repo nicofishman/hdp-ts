@@ -23,7 +23,7 @@ const Game: FC<GameProps> = () => {
     const { id } = useParams<{id: string}>();
     const { user } = useAuthContext();
     const navigate = useNavigate();
-    const { setIsDragging, setDraggedCards, myCards, setMyCards } = useDragAndDropContext();
+    const { setIsDragging, setDraggedCards, myCards, setMyCards, setDroppedCards, setHdpDroppedCards, currentRound, setCurrentRound } = useDragAndDropContext();
     const { t } = useTranslation('global');
     const { game, setGame, setSentCards, setHasSentCards } = useGameContext();
 
@@ -55,14 +55,25 @@ const Game: FC<GameProps> = () => {
             }
             if (data.sentCards.map(st => st.playerId).includes(user.uid)) {
                 setHasSentCards(true);
+            } else {
+                setHasSentCards(false);
             }
+
+            if (currentRound !== data.currentRound) {
+                console.log('round changed', currentRound, data.currentRound);
+
+                setDroppedCards([]);
+                setHdpDroppedCards([]);
+            }
+
+            setCurrentRound(data.currentRound);
             setGame({ id, ...data } as GameType);
             setSentCards(data.sentCards);
             setMyCards(data.players.find((p: Player) => p.id === user.uid)?.cards || []);
         });
 
         return () => unsuscribe();
-    }, [user]);
+    }, [user, currentRound]);
 
     if (!game || !game.currentBlackCard) {
         return (
@@ -78,7 +89,7 @@ const Game: FC<GameProps> = () => {
 
     return (
         <DndContext onDragStart={(e) => handleDragStart(e)}>
-            <div className='flex h-fit min-h-screen w-full flex-col divide-y divide-gray-500 md:h-screen'>
+            <div className='flex h-auto min-h-screen w-full flex-col divide-y divide-gray-500 md:h-screen'>
                 <div className='w-full flex-1 py-2'>
                     <TopContainer currentBlackCard={game.currentBlackCard} lang={game.lang} />
                 </div>

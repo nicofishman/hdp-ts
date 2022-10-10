@@ -221,4 +221,84 @@ export class Firestore {
             })
         });
     };
+
+    static refillCards = (players: Game['players'], lang: Languages, usedCards: number[]) => {
+        const newPlayers: Player[] = [];
+        const cardsUsed = [...usedCards];
+
+        players.forEach(player => {
+            const newCards = shuffleCards(lang, 'White', usedCards, WHITE_CARDS_PER_PLAYER - player.cards.length);
+
+            newPlayers.push({
+                ...player,
+                cards: [...player.cards, ...newCards]
+            });
+            cardsUsed.push(...newCards);
+        });
+
+        return {
+            newPlayers,
+            cardsUsed
+        };
+    };
+
+    static addPoint = (players: Game['players'], playerId: string) => {
+        const newPlayers: Player[] = [];
+
+        players.forEach(player => {
+            if (player.id === playerId) {
+                newPlayers.push({
+                    ...player,
+                    points: player.points + 1
+                });
+            } else {
+                newPlayers.push(player);
+            }
+        });
+
+        return newPlayers;
+    };
+
+    static cycleHDP = (players: Game['players'], currentRound: number) => {
+        const newPlayers: Game['players'] = [];
+
+        players.forEach((player, index) => {
+            if (index === currentRound % players.length) {
+                newPlayers.push({
+                    ...player,
+                    isHdp: true
+                });
+            } else {
+                newPlayers.push({
+                    ...player,
+                    isHdp: false
+                });
+            }
+        });
+
+        return newPlayers;
+    };
+
+    static finishRound = async (gameId: string, winnerId: string) => {
+        const gameRef = doc(Firestore.gamesRef, gameId);
+        const gameData = await getDoc(gameRef).then(g => g.data()) as Game;
+
+        let newPlayers = Firestore.addPoint(gameData.players, winnerId);
+
+        const { newPlayers: newPlayers2, cardsUsed: usedCards } = Firestore.refillCards(newPlayers, gameData.lang, gameData.usedCards);
+
+        newPlayers = Firestore.cycleHDP(newPlayers2, gameData.currentRound);
+
+        const newCurrentBlackCard = shuffleCards(gameData.lang, 'Black', gameData.usedBlackCards, 1)[0];
+
+        const currentRound = gameData.currentRound + 1;
+
+        await updateDoc(gameRef, {
+            players: newPlayers,
+            currentRound,
+            usedCards,
+            currentBlackCard: newCurrentBlackCard,
+            sentCards: []
+        });
+    };
 }
