@@ -5,6 +5,7 @@ import { IoMdCheckmarkCircle } from 'react-icons/io';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { MdLeaderboard } from 'react-icons/md';
+import { isMobile } from 'react-device-detect';
 
 import { useAuthContext } from '../../context/AuthContext';
 import { useDragAndDropContext } from '../../context/DragAndDropContext';
@@ -79,9 +80,10 @@ const TopContainer: FC<TopContainerProps> = ({ currentBlackCard, lang }) => {
 
     return (
         <div className="flex h-full w-full flex-col justify-center">
-            <div className='absolute top-0 m-2 aspect-square w-16'>
+            <div className={clsx('absolute top-0 m-2 flex aspect-square h-16', !isMobile && 'w-28')}>
 
-                <Button className='aspect-square w-full' onClick={() => setModalOpen(true)}>
+                <Button className='w-full justify-around' onClick={() => setModalOpen(true)}>
+                    {!isMobile && (<span>{`${t('round')} ${game.currentRound}`}</span>)}
                     <MdLeaderboard color="#000" size={30}/>
                 </Button>
             </div>
