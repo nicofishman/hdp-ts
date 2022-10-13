@@ -9,6 +9,7 @@ import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
 import { useAuthContext } from '../../context/AuthContext';
 import { Firestore } from '../../firebase/Firestore';
+import { isFishman } from '../../utils/admin';
 
 interface HomeProps {
 
@@ -73,6 +74,17 @@ const Home: FC<HomeProps> = () => {
                     </Button>
                 </Link>
             </div>
+            {
+                isFishman(user.uid) && (
+                    <div className='flex w-full flex-row justify-center lg:gap-4'>
+                        <Link className='w-full' to={'/dashboard'}>
+                            <Button className='h-20 w-full min-w-full'>
+                                <span className="text-4xl">Dashboard</span>
+                            </Button>
+                        </Link>
+                    </div>
+                )
+            }
         </div>
     );
 };

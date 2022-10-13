@@ -1,5 +1,5 @@
 import { User } from 'firebase/auth';
-import { getFirestore, doc, setDoc, collection, getDocs, query, where, arrayUnion, updateDoc, arrayRemove, getDoc } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, collection, getDocs, query, where, arrayUnion, updateDoc, arrayRemove, getDoc, deleteDoc } from 'firebase/firestore';
 import { TFunction } from 'react-i18next';
 import { NavigateFunction } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -296,5 +296,11 @@ export class Firestore {
             currentBlackCard: newCurrentBlackCard,
             sentCards: []
         });
+    };
+
+    static deleteGame = async (gameId: string) => {
+        const gameRef = doc(Firestore.gamesRef, gameId);
+
+        await deleteDoc(gameRef);
     };
 }
