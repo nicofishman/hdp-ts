@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import LogoLight from '../public/img/LogoLight.svg';
-import LogoDark from '../public/img/LogoDark.svg';
+import LogoLight from '../public/img/LogoLight.png';
+import LogoDark from '../public/img/LogoDark.png';
 
 interface IndexProps {
 
