@@ -44,7 +44,7 @@ const DraggableCardStack: FC<DraggableCardStackProps> = ({ cards, draggable, sta
                     cards.map((card, idx) => {
                     // const offset = index === 0 ? 'top-0' : 'top-20';
 
-                        const rotation = cards.length === 1 ? 'rotate-0' : idx === 0 ? 'rotate-[7deg] translate-x-20' : 'rotate-[-7deg] -translate-x-20';
+                        const rotation = cards.length === 1 ? 'rotate-0' : idx === 0 ? 'rotate-[-7deg] -translate-x-20 z-20' : 'rotate-[7deg] translate-x-20 z-10';
 
                         return (
                             <div key={card.id} className={clsx('absolute transition-transform', rotation)}>

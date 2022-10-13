@@ -84,7 +84,7 @@ const TopContainer: FC<TopContainerProps> = ({ currentBlackCard, lang }) => {
 
                 <Button className='w-full justify-around' onClick={() => setModalOpen(true)}>
                     {!isMobile && (<span>{`${t('round')} ${game.currentRound}`}</span>)}
-                    <MdLeaderboard color="#000" size={30}/>
+                    <MdLeaderboard className='fill-black dark:fill-gray-200' size={30}/>
                 </Button>
             </div>
             <PointsModal open={modalOpen} setOpen={setModalOpen}>
