@@ -88,7 +88,7 @@ const TopContainer: FC<TopContainerProps> = ({ currentBlackCard, lang }) => {
                 </Button>
             </div>
             <PointsModal open={modalOpen} setOpen={setModalOpen}>
-                <PlayersCard points gameId={game.id} gameOwner={game.owner} gamePlayers={game.players} userId={user.uid}/>
+                <PlayersCard points currentRound={game.currentRound} gameId={game.id} gameOwner={game.owner} gamePlayers={game.players} userId={user.uid}/>
             </PointsModal>
             <div className='flex w-full flex-row flex-wrap items-center justify-center gap-8'>
                 <Card bgColor={blackCard.color} draggable={false} id={blackCard.id} text={blackCard.text}/>
