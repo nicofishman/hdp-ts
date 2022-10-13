@@ -16,7 +16,7 @@ interface BottomContainersProps {
 };
 
 const BottomContainer: FC<BottomContainersProps> = ({ cards, lang }) => {
-    const { currentPick, droppedCards, hdpSentCards, setHdpSentCards, hdpDroppedCards, addCardToDroppedCards } = useDragAndDropContext();
+    const { currentPick, droppedCards, hdpSentCards, setHdpSentCards, hdpDroppedCards } = useDragAndDropContext();
 
     const { game } = useGameContext();
     const { user } = useAuthContext();
@@ -42,7 +42,7 @@ const BottomContainer: FC<BottomContainersProps> = ({ cards, lang }) => {
                             <div key={cardId}>
                                 {
                                     !droppedCards.includes(cardId) && (
-                                        <Card bgColor={myCard.color} draggable={!(currentPick === droppedCards.length)} id={myCard.id} text={myCard.text} onClick={() => addCardToDroppedCards(cardId)}/>
+                                        <Card bgColor={myCard.color} draggable={!(currentPick === droppedCards.length)} id={myCard.id} text={myCard.text}/>
                                     )
                                 }
 
