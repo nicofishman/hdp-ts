@@ -21,8 +21,6 @@ const BottomContainer: FC<BottomContainersProps> = ({ cards, lang }) => {
     const { game } = useGameContext();
     const { user } = useAuthContext();
 
-    console.log(hdpSentCards);
-
     const isHDP = game.players.filter(p => p.id === user.uid)[0].isHdp;
 
     const allPlayerSentTheirCards = game.sentCards.length === game.players.length - 1;

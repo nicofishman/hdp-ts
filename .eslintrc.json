@@ -33,6 +33,7 @@
         "tailwindcss/enforces-shorthand": "warn",
         "tailwindcss/no-contradicting-classname": "warn",
         "tailwindcss/no-custom-classname": "warn",
+        "no-console": "warn",
         "@typescript-eslint/no-unused-vars": [
             "warn",
             {
