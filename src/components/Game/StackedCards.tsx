@@ -4,7 +4,7 @@ import { isMobile } from 'react-device-detect';
 
 import { useDragAndDropContext } from '../../context/DragAndDropContext';
 import { Languages } from '../../lang/i18n';
-import { createHashFromToCards, getCardById, getCardsFromHash } from '../../utils/game';
+import { createHashFromToCards, getCardById } from '../../utils/game';
 import Card from '../Card';
 
 import DraggableCardStack from './DraggableCardStack';
@@ -20,8 +20,6 @@ const StackedCards: FC<StackedCardsProps> = ({ cards, lang, draggable, playerId 
     const stackId = createHashFromToCards(cards);
     const myCards = cards.map((cardId) => getCardById(cardId, lang));
 
-    console.log('StackedCards', getCardsFromHash(stackId, lang)[0].text, draggable);
-
     const { draggedCards } = useDragAndDropContext();
 
     return (
@@ -31,9 +29,10 @@ const StackedCards: FC<StackedCardsProps> = ({ cards, lang, draggable, playerId 
             {!draggedCards?.includes(cards[0])
                 ? (cards.map((cardId: number, idx: number) => {
                     const myCard = getCardById(cardId, lang);
+
                     // const offset = idx === 0 ? 'top-0' : 'top-20';
 
-                    const rotation = cards.length === 1 ? 'rotate-0' : idx === 0 ? 'rotate-[7deg] translate-x-20' : 'rotate-[-7deg] -translate-x-20';
+                    const rotation = cards.length === 1 ? 'rotate-0' : idx === 0 ? 'rotate-[-7deg] -translate-x-20 z-20' : 'rotate-[7deg] translate-x-20 z-10';
 
                     return (
                         <div key={cardId} className={clsx('absolute transition-transform', rotation)}>

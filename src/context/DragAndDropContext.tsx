@@ -43,7 +43,6 @@ const DragAndDropProvider: FC<PropsWithChildren> = ({ children }) => {
     };
 
     const addCardsToHdpDroppedCards = (c: GameType['sentCards']) => {
-        console.log(hdpSentCards.filter((card) => card.playerId !== c[0].playerId));
         if (!c[0].playerId) return;
         setHdpDroppedCards([...hdpDroppedCards, c[0]]);
         setHdpSentCards(hdpSentCards.filter((card) => card.playerId !== c[0].playerId));
