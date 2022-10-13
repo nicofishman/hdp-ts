@@ -7,20 +7,19 @@ import { useTranslation } from 'react-i18next';
 import { Firestore } from '../../firebase/Firestore';
 import { Player } from '../../types/game';
 import Container from '../common/Container';
-import { useGameContext } from '../../context/GameContext';
 
 interface PlayersCardProps {
     gamePlayers: Player[];
     gameOwner: string;
     userId: string;
     gameId: string;
-    points?: boolean
+    points?: boolean;
+    currentRound?: number;
 };
 
-const PlayersCard: FC<PlayersCardProps> = ({ gamePlayers, gameOwner, userId, gameId, points = false }) => {
+const PlayersCard: FC<PlayersCardProps> = ({ gamePlayers, gameOwner, userId, gameId, points = false, currentRound = 0 }) => {
     const players = points ? gamePlayers.sort((a, b) => b.points - a.points) : gamePlayers;
     const { t } = useTranslation('global');
-    const { game } = useGameContext();
 
     return (
         <Container className='flex w-full flex-col'>
@@ -28,8 +27,7 @@ const PlayersCard: FC<PlayersCardProps> = ({ gamePlayers, gameOwner, userId, gam
                 {
                     points && isMobile && (
                         <div className='py-2'>
-
-                            <span className='text-2xl uppercase'>{t('round')} {game.currentRound}</span>
+                            <span className='text-2xl uppercase'>{t('round')} {currentRound}</span>
                         </div>
                     )
                 }

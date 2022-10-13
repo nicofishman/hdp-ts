@@ -1,4 +1,4 @@
-import React, { createContext, FC, PropsWithChildren, useContext, useState } from 'react';
+import React, { createContext, FC, PropsWithChildren, useContext, useMemo, useState } from 'react';
 
 import { Game as GameType } from '../types/game';
 
@@ -18,14 +18,14 @@ const GameProvider: FC<PropsWithChildren> = ({ children }) => {
     const [sentCards, setSentCards] = useState<{playerId: string; cards: number[]}[]>([]);
     const [hasSentCards, setHasSentCards] = useState<boolean>(false);
 
-    const value: GameContextType = {
+    const value: GameContextType = useMemo(() => ({
         game,
         setGame,
         sentCards,
         setSentCards,
         hasSentCards,
         setHasSentCards
-    };
+    }), [game, sentCards, hasSentCards]);
 
     return (
         <GameContext.Provider value={value}>
