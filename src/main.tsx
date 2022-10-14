@@ -22,6 +22,7 @@ import Lobby from './pages/Lobby';
 import Game from './pages/Game';
 import DragAndDropProvider from './context/DragAndDropContext';
 import GameProvider from './context/GameContext';
+import AdminDashboard from './pages/AdminDashboard';
 
 const isDark = window.localStorage.getItem('theme') === 'dark';
 const lang = window.localStorage.getItem('lang') || 'es';
@@ -83,6 +84,10 @@ const router = createBrowserRouter([
                         element: <Account />
                     }
                 ]
+            },
+            {
+                path: '/dashboard',
+                element: <AdminDashboard />
             }
         ]
     }
