@@ -21,6 +21,8 @@ const Home: FC<HomeProps> = () => {
     const { user } = useAuthContext();
     const navigate = useNavigate();
 
+    console.log(isFishman(user.uid), user.uid);
+
     const handleCreateGame = () => {
         if (!user.uid) {
             toast(t('auth.loginRequired'), {
