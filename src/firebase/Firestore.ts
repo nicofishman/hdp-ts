@@ -1,5 +1,18 @@
 import { User } from 'firebase/auth';
-import { getFirestore, doc, setDoc, collection, getDocs, query, where, arrayUnion, updateDoc, arrayRemove, getDoc, deleteDoc } from 'firebase/firestore';
+import {
+    getFirestore,
+    doc,
+    setDoc,
+    collection,
+    getDocs,
+    query,
+    where,
+    arrayUnion,
+    updateDoc,
+    arrayRemove,
+    getDoc,
+    deleteDoc
+} from 'firebase/firestore';
 import { TFunction } from 'react-i18next';
 import { NavigateFunction } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -31,27 +44,36 @@ export class Firestore {
     });
 
     static setUserDB = async (user: User) => {
-        await setDoc(doc(Firestore.db, `Users/${user.uid}`), { username: user.displayName });
+        await setDoc(doc(Firestore.db, `Users/${user.uid}`), {
+            username: user.displayName
+        });
     };
 
     static changeDisplayName = async (user: User, newDisplayName: string) => {
-        await setDoc(doc(Firestore.db, `Users/${user.uid}`), { username: newDisplayName });
+        await setDoc(doc(Firestore.db, `Users/${user.uid}`), {
+            username: newDisplayName
+        });
     };
 
     static getShortCodes = async () => {
         const gamesSnap = await getDocs(Firestore.gamesRef);
-        const shortCodesList = gamesSnap.docs.map(game => game.data().shortCode);
+        const shortCodesList = gamesSnap.docs.map(
+            (game) => game.data().shortCode
+        );
 
         return shortCodesList;
     };
 
     static getGameByShortCode = async (shortCode: string) => {
         const docs: Game[] = [];
-        const q = query(Firestore.gamesRef, where('shortCode', '==', shortCode));
+        const q = query(
+            Firestore.gamesRef,
+            where('shortCode', '==', shortCode)
+        );
 
         const querySnapshot = await getDocs(q);
 
-        querySnapshot.forEach(doc => {
+        querySnapshot.forEach((doc) => {
             docs.push(doc.data() as Game);
         });
 
@@ -62,7 +84,11 @@ export class Firestore {
         return docs[0];
     };
 
-    static createGame = async (user: User, lang: Languages, navigate: NavigateFunction) => {
+    static createGame = async (
+        user: User,
+        lang: Languages,
+        navigate: NavigateFunction
+    ) => {
         const newGameRef = doc(Firestore.gamesRef);
         let shortCode = generateShortCode();
 
@@ -73,13 +99,15 @@ export class Firestore {
         }
 
         const newGameData = {
-            players: [{
-                id: user.uid,
-                displayName: user.displayName,
-                isHdp: true,
-                points: 0,
-                cards: []
-            }],
+            players: [
+                {
+                    id: user.uid,
+                    displayName: user.displayName,
+                    isHdp: true,
+                    points: 0,
+                    cards: []
+                }
+            ],
             currentRound: 1, // Para poner el currentHDP se hace //? players[currentRound % players.length].isHdp = true
             owner: user.uid,
             isStarted: false,
@@ -91,10 +119,11 @@ export class Firestore {
             shortCode
         };
 
-        await setDoc(newGameRef, { id: newGameRef.id, ...newGameData })
-            .then(() => {
+        await setDoc(newGameRef, { id: newGameRef.id, ...newGameData }).then(
+            () => {
                 navigate(`lobby/${newGameRef.id}`);
-            });
+            }
+        );
     };
 
     static addPlayerToGame = async (user: User, gameId: string) => {
@@ -118,7 +147,12 @@ export class Firestore {
         });
     };
 
-    static joinGame = async (user: User, shortCode: string, navigate: NavigateFunction, t: TFunction<'global'>) => {
+    static joinGame = async (
+        user: User,
+        shortCode: string,
+        navigate: NavigateFunction,
+        t: TFunction<'global'>
+    ) => {
         const game = await Firestore.getGameByShortCode(shortCode);
 
         if (!game || !game?.id) {
@@ -145,7 +179,7 @@ export class Firestore {
             return;
         }
 
-        if (game.players.find(player => player.id === user.uid)) {
+        if (game.players.find((player) => player.id === user.uid)) {
             toast(t('alreadyingame'), {
                 type: 'error',
                 containerId: 'A',
@@ -164,18 +198,30 @@ export class Firestore {
 
     static startGame = async (gameId: string) => {
         const gameRef = doc(Firestore.gamesRef, gameId);
-        const gameData = await getDoc(gameRef).then(g => g.data()) as Game;
+        const gameData = (await getDoc(gameRef).then((g) => g.data())) as Game;
 
         const newPlayers: Player[] = [];
         const usedCards: number[] = gameData.usedCards;
 
-        const currentBlackCard = shuffleCards(gameData.lang, 'Black', usedCards, 1)[0];
-        const usedBlackCards: number[] = [];
+        const currentBlackCard = shuffleCards(
+            gameData.lang,
+            'Black',
+            usedCards,
+            1
+        )[0];
+
+        // TODO: usedBlackCards tiene que ser leido
+        const usedBlackCards: number[] = gameData.usedBlackCards;
 
         usedBlackCards.push(currentBlackCard);
 
-        gameData.players.forEach(player => {
-            const playerCards = shuffleCards(gameData.lang, 'White', usedCards, WHITE_CARDS_PER_PLAYER);
+        gameData.players.forEach((player) => {
+            const playerCards = shuffleCards(
+                gameData.lang,
+                'White',
+                usedCards,
+                WHITE_CARDS_PER_PLAYER
+            );
 
             newPlayers.push({
                 ...player,
@@ -194,15 +240,19 @@ export class Firestore {
         });
     };
 
-    static sendCards = async (gameId: string, playerId: string, cards: number[]) => {
+    static sendCards = async (
+        gameId: string,
+        playerId: string,
+        cards: number[]
+    ) => {
         const gameRef = doc(Firestore.gamesRef, gameId);
-        const gameData = await getDoc(gameRef).then(g => g.data()) as Game;
+        const gameData = (await getDoc(gameRef).then((g) => g.data())) as Game;
 
-        const newPlayers = gameData.players.map(player => {
+        const newPlayers = gameData.players.map((player) => {
             if (player.id === playerId) {
                 return {
                     ...player,
-                    cards: player.cards.filter(card => !cards.includes(card))
+                    cards: player.cards.filter((card) => !cards.includes(card))
                 };
             } else {
                 return player;
@@ -218,12 +268,21 @@ export class Firestore {
         });
     };
 
-    static refillCards = (players: Game['players'], lang: Languages, usedCards: number[]) => {
+    static refillCards = (
+        players: Game['players'],
+        lang: Languages,
+        usedCards: number[]
+    ) => {
         const newPlayers: Player[] = [];
         const cardsUsed = [...usedCards];
 
-        players.forEach(player => {
-            const newCards = shuffleCards(lang, 'White', usedCards, WHITE_CARDS_PER_PLAYER - player.cards.length);
+        players.forEach((player) => {
+            const newCards = shuffleCards(
+                lang,
+                'White',
+                usedCards,
+                WHITE_CARDS_PER_PLAYER - player.cards.length
+            );
 
             newPlayers.push({
                 ...player,
@@ -241,7 +300,7 @@ export class Firestore {
     static addPoint = (players: Game['players'], playerId: string) => {
         const newPlayers: Player[] = [];
 
-        players.forEach(player => {
+        players.forEach((player) => {
             if (player.id === playerId) {
                 newPlayers.push({
                     ...player,
@@ -277,15 +336,25 @@ export class Firestore {
 
     static finishRound = async (gameId: string, winnerId: string) => {
         const gameRef = doc(Firestore.gamesRef, gameId);
-        const gameData = await getDoc(gameRef).then(g => g.data()) as Game;
+        const gameData = (await getDoc(gameRef).then((g) => g.data())) as Game;
 
         let newPlayers = Firestore.addPoint(gameData.players, winnerId);
 
-        const { newPlayers: newPlayers2, cardsUsed: usedCards } = Firestore.refillCards(newPlayers, gameData.lang, gameData.usedCards);
+        const { newPlayers: newPlayers2, cardsUsed: usedCards } =
+            Firestore.refillCards(
+                newPlayers,
+                gameData.lang,
+                gameData.usedCards
+            );
 
         newPlayers = Firestore.cycleHDP(newPlayers2, gameData.currentRound);
 
-        const newCurrentBlackCard = shuffleCards(gameData.lang, 'Black', gameData.usedBlackCards, 1)[0];
+        const newCurrentBlackCard = shuffleCards(
+            gameData.lang,
+            'Black',
+            gameData.usedBlackCards,
+            1
+        )[0];
 
         const currentRound = gameData.currentRound + 1;
 
