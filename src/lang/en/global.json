@@ -35,5 +35,11 @@
     "cardsorder": "Cards order matter!",
     "youarehdp": "You are the hdp, wait for players to send their cards",
     "dropchoicehdp": "Drop your choice here!",
-    "round": "Round"
+    "round": "Round",
+    "username": "Username",
+    "enterUsername": "Enter your username",
+    "usernameError": "Please enter a username",
+    "usernameChanged": "Username changed successfully",
+    "userInRoomMissingDisplayName": "There is a user without a username",
+    "anonymous": "Anonymous"
 }

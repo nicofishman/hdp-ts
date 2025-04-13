@@ -13,7 +13,7 @@ import {
     getDoc,
     deleteDoc
 } from 'firebase/firestore';
-import { TFunction } from 'react-i18next';
+import { DefaultResources, TFunction } from 'react-i18next';
 import { NavigateFunction } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -147,6 +147,33 @@ export class Firestore {
         });
     };
 
+    static updatePlayerDisplayName = async (
+        user: User,
+        shortCode: string,
+        newDisplayName: string
+    ) => {
+        const game = await Firestore.getGameByShortCode(shortCode);
+
+        if (!game) return;
+        const gameRef = doc(Firestore.gamesRef, game.id);
+        const gameData = (await getDoc(gameRef).then((g) => g.data())) as Game;
+
+        const newPlayers = gameData.players.map((player) => {
+            if (player.id === user.uid) {
+                return {
+                    ...player,
+                    displayName: newDisplayName
+                };
+            } else {
+                return player;
+            }
+        });
+
+        await updateDoc(gameRef, {
+            players: newPlayers
+        });
+    };
+
     static joinGame = async (
         user: User,
         shortCode: string,
@@ -196,9 +223,21 @@ export class Firestore {
         navigate(`/lobby/${game.id}`);
     };
 
-    static startGame = async (gameId: string) => {
+    static startGame = async (
+        gameId: string
+    ): Promise<{ error: keyof DefaultResources['global'] | null }> => {
         const gameRef = doc(Firestore.gamesRef, gameId);
         const gameData = (await getDoc(gameRef).then((g) => g.data())) as Game;
+
+        const gamePlayers = gameData.players;
+
+        const anyPlayerWithoutUsername = gamePlayers.some(
+            (player) => !player.displayName
+        );
+
+        if (anyPlayerWithoutUsername) {
+            return { error: 'userInRoomMissingDisplayName' };
+        }
 
         const newPlayers: Player[] = [];
         const usedCards: number[] = gameData.usedCards;
@@ -238,6 +277,8 @@ export class Firestore {
             usedCards,
             usedBlackCards
         });
+
+        return { error: null };
     };
 
     static sendCards = async (

@@ -36,5 +36,11 @@
     "cardsorder": "¡El orden de las cartas importa!",
     "youarehdp": "Sos el hdp, esperá a que los jugadores manden sus cartas",
     "dropchoicehdp": "Arrastrá la carta que creas que ganó",
-    "round": "Ronda"
+    "round": "Ronda",
+    "username": "Nombre de usuario",
+    "enterUsername": "Ingresá tu nombre de usuario",
+    "usernameError": "Ingresá un nombre de usuario",
+    "usernameChanged": "Nombre de usuario cambiado con éxito",
+    "userInRoomMissingDisplayName": "Hay un usuario sin nombre de usuario",
+    "anonymous": "Anónimo"
 }
