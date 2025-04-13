@@ -17,9 +17,9 @@ import { DefaultResources, TFunction } from 'react-i18next';
 import { NavigateFunction } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { Languages } from '../lang/i18n';
 import { Game, Player } from '../types/game';
 import { generateShortCode, shuffleCards } from '../utils/game';
+import { CardSet } from '../lang/cardSets';
 
 import { FirebaseApp } from './FirebaseApp';
 
@@ -86,7 +86,7 @@ export class Firestore {
 
     static createGame = async (
         user: User,
-        lang: Languages,
+        cardSet: CardSet,
         navigate: NavigateFunction
     ) => {
         const newGameRef = doc(Firestore.gamesRef);
@@ -115,7 +115,7 @@ export class Firestore {
             usedCards: [],
             usedBlackCards: [],
             currentBlackCard: null,
-            lang,
+            lang: cardSet,
             shortCode
         };
 
@@ -124,6 +124,14 @@ export class Firestore {
                 navigate(`lobby/${newGameRef.id}`);
             }
         );
+    };
+
+    static updateGameCardSet = async (gameId: string, cardSet: CardSet) => {
+        const gameRef = doc(Firestore.gamesRef, gameId);
+
+        await updateDoc(gameRef, {
+            lang: cardSet
+        });
     };
 
     static addPlayerToGame = async (user: User, gameId: string) => {
@@ -311,7 +319,7 @@ export class Firestore {
 
     static refillCards = (
         players: Game['players'],
-        lang: Languages,
+        lang: CardSet,
         usedCards: number[]
     ) => {
         const newPlayers: Player[] = [];

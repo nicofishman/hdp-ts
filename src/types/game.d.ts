@@ -1,4 +1,4 @@
-import { Languages } from '../lang/i18n';
+import { CardSet } from '../lang/cardSets';
 
 export interface Player {
     displayName: string | null;
@@ -12,10 +12,10 @@ export interface Game {
     id: string;
     isStarted: boolean;
     currentRound: number;
-    lang: Languages;
+    lang: CardSet;
     owner: string;
     players: Player[];
-    sentCards: { playerId: string, cards: number[] }[];
+    sentCards: { playerId: string; cards: number[] }[];
     shortCode: string;
     usedCards: number[];
     usedBlackCards: number[];
@@ -27,5 +27,5 @@ export interface Card {
     text: string;
     color: 'white' | 'black';
     extension: string | number;
-    pick?: number
+    pick?: number;
 }

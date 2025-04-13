@@ -11,30 +11,31 @@ import { useAuthContext } from '../../context/AuthContext';
 import { useDragAndDropContext } from '../../context/DragAndDropContext';
 import { useGameContext } from '../../context/GameContext';
 import { Firestore } from '../../firebase/Firestore';
-import { Languages } from '../../lang/i18n';
 import { getCardById } from '../../utils/game';
 import Card from '../Card';
 import Button from '../common/Button';
 import PlayersCard from '../Lobby/PlayersCard';
+import { CardSet } from '../../lang/cardSets';
 
 import DroppableSection from './DroppableSection';
 import PointsModal from './PointsModal';
 
 interface TopContainerProps {
     currentBlackCard: number;
-    lang: Languages;
-};
+    lang: CardSet;
+}
 
 const TopContainer: FC<TopContainerProps> = ({ currentBlackCard, lang }) => {
     const [modalOpen, setModalOpen] = useState(false);
 
-    const { setCurrentPick, droppedCards, hdpDroppedCards } = useDragAndDropContext();
+    const { setCurrentPick, droppedCards, hdpDroppedCards } =
+        useDragAndDropContext();
     const { game, hasSentCards } = useGameContext();
     const { user } = useAuthContext();
     const { t } = useTranslation('global');
     const blackCard = getCardById(currentBlackCard, lang);
 
-    const isHDP = game.players.filter(p => p.id === user.uid)[0].isHdp;
+    const isHDP = game.players.filter((p) => p.id === user.uid)[0].isHdp;
 
     useEffect(() => {
         setCurrentPick(blackCard.pick!);
@@ -56,7 +57,10 @@ const TopContainer: FC<TopContainerProps> = ({ currentBlackCard, lang }) => {
                 });
                 toast.clearWaitingQueue();
             } else {
-                await Firestore.finishRound(game.id, hdpDroppedCards[0].playerId);
+                await Firestore.finishRound(
+                    game.id,
+                    hdpDroppedCards[0].playerId
+                );
             }
         } else {
             if (droppedCards.length === blackCard.pick) {
@@ -80,39 +84,61 @@ const TopContainer: FC<TopContainerProps> = ({ currentBlackCard, lang }) => {
 
     return (
         <div className="flex h-full w-full flex-col justify-center">
-            <div className={clsx('absolute top-0 m-2 flex aspect-square h-16', !isMobile && 'w-28')}>
-
-                <Button className='w-full justify-around' onClick={() => setModalOpen(true)}>
-                    {!isMobile && (<span>{`${t('round')} ${game.currentRound}`}</span>)}
-                    <MdLeaderboard className='fill-black dark:fill-gray-200' size={30}/>
+            <div
+                className={clsx(
+                    'absolute top-0 m-2 flex aspect-square h-16',
+                    !isMobile && 'w-28'
+                )}
+            >
+                <Button
+                    className="w-full justify-around"
+                    onClick={() => setModalOpen(true)}
+                >
+                    {!isMobile && (
+                        <span>{`${t('round')} ${game.currentRound}`}</span>
+                    )}
+                    <MdLeaderboard
+                        className="fill-black dark:fill-gray-200"
+                        size={30}
+                    />
                 </Button>
             </div>
             <PointsModal open={modalOpen} setOpen={setModalOpen}>
-                <PlayersCard points currentRound={game.currentRound} gameId={game.id} gameOwner={game.owner} gamePlayers={game.players} userId={user.uid}/>
+                <PlayersCard
+                    points
+                    currentRound={game.currentRound}
+                    gameId={game.id}
+                    gameOwner={game.owner}
+                    gamePlayers={game.players}
+                    userId={user.uid}
+                />
             </PointsModal>
-            <div className='flex w-full flex-row flex-wrap items-center justify-center gap-8'>
-                <Card bgColor={blackCard.color} draggable={false} id={blackCard.id} text={blackCard.text}/>
-                <DroppableSection lang={lang} numberOfCards={blackCard.pick}/>
+            <div className="flex w-full flex-row flex-wrap items-center justify-center gap-8">
+                <Card
+                    bgColor={blackCard.color}
+                    draggable={false}
+                    id={blackCard.id}
+                    text={blackCard.text}
+                />
+                <DroppableSection lang={lang} numberOfCards={blackCard.pick} />
             </div>
             {
-                (
-                    <div className='flex w-full justify-center'>
-                        <Button className={clsx('mt-4 ml-[-16px] aspect-square p-3', hasSentCards && 'cursor-not-allowed')} onClick={handleSendCards}>
-                            {
-                                hasSentCards
-                                    ? (
-                                        <IoMdCheckmarkCircle className='text-2xl text-green-700 dark:text-green-500'/>
-                                    )
-                                    : (
-
-                                        <RiSendPlaneFill size={25}/>
-                                    )
-                            }
-                        </Button>
-                    </div>
-                )
+                <div className="flex w-full justify-center">
+                    <Button
+                        className={clsx(
+                            'mt-4 ml-[-16px] aspect-square p-3',
+                            hasSentCards && 'cursor-not-allowed'
+                        )}
+                        onClick={handleSendCards}
+                    >
+                        {hasSentCards ? (
+                            <IoMdCheckmarkCircle className="text-2xl text-green-700 dark:text-green-500" />
+                        ) : (
+                            <RiSendPlaneFill size={25} />
+                        )}
+                    </Button>
+                </div>
             }
-
         </div>
     );
 };

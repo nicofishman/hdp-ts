@@ -33,25 +33,13 @@ const Home: FC<HomeProps> = () => {
 
             return;
         }
-        Firestore.createGame(
-            user,
-            window.localStorage.getItem('lang') === 'en' ? 'en' : 'es',
-            navigate
-        );
+        Firestore.createGame(user, 'es', navigate);
     };
 
     const handleSearchGameClick = () => {
         const auth = getAuth(FirebaseApp);
 
         if (!user.uid) {
-            // toast(t('auth.loginRequired'), {
-            //     type: 'error',
-            //     containerId: 'A',
-            //     theme: 'colored',
-            //     position: 'top-right',
-            //     autoClose: 3000
-            // });
-            // toast.clearWaitingQueue();
             signInAnonymously(auth)
                 .then(({ user }) => {
                     Firestore.joinGame(

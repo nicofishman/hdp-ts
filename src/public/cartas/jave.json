@@ -1,0 +1,134 @@
+{
+    "whiteCards": [
+        {
+            "color": "White",
+            "text": "Jave1",
+            "id": 1,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Jave2",
+            "id": 2,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Jave3",
+            "id": 3,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Jave4",
+            "id": 4,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Jave5",
+            "id": 5,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Jave6",
+            "id": 6,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Jave7",
+            "id": 7,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Jave8",
+            "id": 8,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Jave9",
+            "id": 9,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Jave10",
+            "id": 10,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Jave11",
+            "id": 11,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Jave12",
+            "id": 12,
+            "extension": "Jave"
+        }
+    ],
+    "blackCards": [
+        {
+            "id": 13,
+            "text": "Jave Black 13 _____",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        },
+        {
+            "id": 14,
+            "text": "Jave Black 14 _____",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        },
+        {
+            "id": 15,
+            "text": "Jave Black 15 _____",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        },
+        {
+            "id": 16,
+            "text": "Jave Black 16 _____",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        },
+        {
+            "id": 17,
+            "text": "Jave Black 17 _____",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        },
+        {
+            "id": 18,
+            "text": "Jave Black 18 _____",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        },
+        {
+            "id": 19,
+            "text": "Jave Black 19 _____",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        },
+        {
+            "id": 20,
+            "text": "Jave Black 20 _____",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        }
+    ]
+}

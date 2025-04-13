@@ -13,6 +13,8 @@ import { useAuthContext } from '../context/AuthContext';
 import { Firestore } from '../firebase/Firestore';
 import { Game, Player } from '../types/game';
 import Input from '../components/common/Input';
+import { CardSet, cardSets } from '../lang/cardSets';
+import Select from '../components/common/Select';
 
 interface LobbyProps {}
 
@@ -121,6 +123,11 @@ const Lobby: FC<LobbyProps> = () => {
         }
     };
 
+    const handleLanguageChange = (lang: CardSet) => {
+        Firestore.updateGameCardSet(game.id, lang);
+        setGame({ ...game, lang });
+    };
+
     return game.id ? (
         <div className="relative mx-[10%] flex h-screen w-full min-w-[215px] flex-col items-center justify-center gap-8 sm:mx-[17%] md:mx-[15%] lg:mx-[25%] xl:mx-[35%]">
             <PlayersCard
@@ -130,11 +137,28 @@ const Lobby: FC<LobbyProps> = () => {
                 userId={user.uid}
             />
             {game.owner === user.uid && (
-                <Button
-                    className="h-10 w-1/2 min-w-[160px] text-lg"
-                    text={t('startgame')}
-                    onClick={startGameClick}
-                />
+                <>
+                    <Select
+                        mainOption={'Card Set'}
+                        options={Object.entries(cardSets).map(
+                            ([key, value]) => {
+                                return {
+                                    text: value,
+                                    value: key,
+                                    selected: game.lang === key
+                                };
+                            }
+                        )}
+                        onChange={(value) =>
+                            handleLanguageChange(value as CardSet)
+                        }
+                    />
+                    <Button
+                        className="h-10 w-1/2 min-w-[160px] text-lg"
+                        text={t('startgame')}
+                        onClick={startGameClick}
+                    />
+                </>
             )}
             <div className="absolute bottom-5 flex w-full min-w-[160px] flex-col gap-4 md:flex-row">
                 <div className="relative flex h-full min-h-[40px] flex-1 flex-col gap-y-0.5 place-self-end">
