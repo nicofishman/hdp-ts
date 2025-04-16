@@ -2,130 +2,803 @@
     "whiteCards": [
         {
             "color": "White",
-            "text": "Jave1",
+            "text": "Nico",
             "id": 1,
             "extension": "Jave"
         },
         {
             "color": "White",
-            "text": "Jave2",
+            "text": "Martu",
             "id": 2,
             "extension": "Jave"
         },
         {
             "color": "White",
-            "text": "Jave3",
+            "text": "Jave",
             "id": 3,
             "extension": "Jave"
         },
         {
             "color": "White",
-            "text": "Jave4",
+            "text": "Aldu",
             "id": 4,
             "extension": "Jave"
         },
         {
             "color": "White",
-            "text": "Jave5",
+            "text": "Azu",
             "id": 5,
             "extension": "Jave"
         },
         {
             "color": "White",
-            "text": "Jave6",
+            "text": "Brian",
             "id": 6,
             "extension": "Jave"
         },
         {
             "color": "White",
-            "text": "Jave7",
+            "text": "Karim",
             "id": 7,
             "extension": "Jave"
         },
         {
             "color": "White",
-            "text": "Jave8",
+            "text": "Cami",
             "id": 8,
             "extension": "Jave"
         },
         {
             "color": "White",
-            "text": "Jave9",
+            "text": "Diego",
             "id": 9,
             "extension": "Jave"
         },
         {
             "color": "White",
-            "text": "Jave10",
+            "text": "Eze",
             "id": 10,
             "extension": "Jave"
         },
         {
             "color": "White",
-            "text": "Jave11",
+            "text": "Guada",
             "id": 11,
             "extension": "Jave"
         },
         {
             "color": "White",
-            "text": "Jave12",
+            "text": "Ivu",
             "id": 12,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Joaco",
+            "id": 13,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Juli",
+            "id": 14,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "José",
+            "id": 15,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Kathy",
+            "id": 16,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Leo",
+            "id": 17,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Luna",
+            "id": 18,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Male West",
+            "id": 19,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Mauro",
+            "id": 20,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Minna",
+            "id": 21,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Miri",
+            "id": 22,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Naty",
+            "id": 23,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Santi",
+            "id": 24,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Tomy",
+            "id": 25,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Valen",
+            "id": 26,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Zeta",
+            "id": 27,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Tobi Choclin",
+            "id": 28,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Toto",
+            "id": 29,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Mica Gorkin",
+            "id": 30,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Julito (mejan)",
+            "id": 31,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Andy (mejan)",
+            "id": 32,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Tobi, zeta y yo",
+            "id": 33,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Luli",
+            "id": 34,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Ari",
+            "id": 35,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Osvaldo",
+            "id": 36,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Yami de psicología evolutiva",
+            "id": 37,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Brita",
+            "id": 38,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "BAMI",
+            "id": 39,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "el cuarto piso",
+            "id": 40,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "el templo",
+            "id": 41,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Juli de seguridad",
+            "id": 42,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Gladys",
+            "id": 43,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "la cancha de madera",
+            "id": 44,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "el mástil",
+            "id": 45,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "el callejón",
+            "id": 46,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "oro y negro",
+            "id": 47,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "(el de tu derecha)",
+            "id": 48,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "(el de tu izquierda)",
+            "id": 49,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "un guaymallén todo pegado",
+            "id": 50,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "jugo caliente",
+            "id": 51,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "pepsi",
+            "id": 52,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "la oficina de madrijim",
+            "id": 53,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "una actividad imposible",
+            "id": 54,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "FALTAN PELOTAS!!",
+            "id": 55,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Paquete",
+            "id": 56,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "escuela de madrijim",
+            "id": 57,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Mati Glusman",
+            "id": 58,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Anakim",
+            "id": 59,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "janij promedio de primaria",
+            "id": 60,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "janij promedio de adoles",
+            "id": 61,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "janij promedio de jardín",
+            "id": 62,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "patio de juegos",
+            "id": 63,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "relaciones amorosas",
+            "id": 64,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "apuestas deportivas",
+            "id": 65,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "la cúpula",
+            "id": 66,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "una buena trasnochada",
+            "id": 67,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "el peor majane",
+            "id": 68,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Macabi",
+            "id": 69,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "el himno",
+            "id": 70,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "último majane como janij",
+            "id": 71,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "majané en la playa",
+            "id": 72,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "un mifkad de recontra mierda",
+            "id": 73,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "pelotudo",
+            "id": 74,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "la pobreza",
+            "id": 75,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "tu vieja",
+            "id": 76,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "dios",
+            "id": 77,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "la quinta",
+            "id": 78,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Jorge de seguridad",
+            "id": 79,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "virgen",
+            "id": 80,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "El pelado de consumos problemáticos",
+            "id": 81,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "la trasnocurso",
+            "id": 82,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "actividad de mancharse",
+            "id": 83,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "colgar banderas",
+            "id": 84,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "los cánticos",
+            "id": 85,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "canciones de jave",
+            "id": 86,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "los viernes",
+            "id": 87,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "los sábados",
+            "id": 88,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "panchitos de trasnochada",
+            "id": 89,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "iom sport",
+            "id": 90,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "el fogón",
+            "id": 91,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "¿DÓNDE ESTÁ WALLY?",
+            "id": 92,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "Que el micro tarde 2 horas en salir",
+            "id": 93,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "la terraza de martu",
+            "id": 94,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "El \"Tomy\" en el buzo",
+            "id": 95,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "el mifkad del brit mila con la salchicha",
+            "id": 96,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "los años de curso",
+            "id": 97,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "los años de adoles",
+            "id": 98,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "la concha de tu madre",
+            "id": 99,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "las prácticas",
+            "id": 100,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "un inodoro",
+            "id": 101,
+            "extension": "Jave"
+        },
+        {
+            "color": "White",
+            "text": "el cagómetro",
+            "id": 102,
             "extension": "Jave"
         }
     ],
     "blackCards": [
         {
-            "id": 13,
-            "text": "Jave Black 13 _____",
+            "id": 103,
+            "text": "____ + ____, la combinación perfecta.",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 2
+        },
+        {
+            "id": 104,
+            "text": "____ y ____ no pegan con nada.",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 2
+        },
+        {
+            "id": 105,
+            "text": "Un acto de caridad es/son ____.",
             "color": "Black",
             "extension": "Jave",
             "pick": 1
         },
         {
-            "id": 14,
-            "text": "Jave Black 14 _____",
+            "id": 106,
+            "text": "Lo mejor de mi janijato fue ____.",
             "color": "Black",
             "extension": "Jave",
             "pick": 1
         },
         {
-            "id": 15,
-            "text": "Jave Black 15 _____",
+            "id": 107,
+            "text": "____: ojalá no hubiera pasado.",
             "color": "Black",
             "extension": "Jave",
             "pick": 1
         },
         {
-            "id": 16,
-            "text": "Jave Black 16 _____",
+            "id": 108,
+            "text": "Quiero más ____",
             "color": "Black",
             "extension": "Jave",
             "pick": 1
         },
         {
-            "id": 17,
-            "text": "Jave Black 17 _____",
+            "id": 109,
+            "text": "Nada bueno puede salir de ____.",
             "color": "Black",
             "extension": "Jave",
             "pick": 1
         },
         {
-            "id": 18,
-            "text": "Jave Black 18 _____",
+            "id": 110,
+            "text": "Me quiero sacar los oídos cada vez que escucho a ____.",
             "color": "Black",
             "extension": "Jave",
             "pick": 1
         },
         {
-            "id": 19,
-            "text": "Jave Black 19 _____",
+            "id": 111,
+            "text": "Me quiero sacar los ojos cada vez que veo a ____.",
             "color": "Black",
             "extension": "Jave",
             "pick": 1
         },
         {
-            "id": 20,
-            "text": "Jave Black 20 _____",
+            "id": 112,
+            "text": "El otro me llamaron y me dijeron que alguien estuvo con el coordinador del año pasado, me preguntaron quién fue y yo nombré a ____.",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        },
+        {
+            "id": 113,
+            "text": "Muchachos, no necesito droga para estar colgado, ya estoy colgado con ____.",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        },
+        {
+            "id": 114,
+            "text": "NO VAYAS AL BAÑO! HAY ____.",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        },
+        {
+            "id": 115,
+            "text": "Nuevo hit de \"la 13\": Zeta y el misterio de ____.",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        },
+        {
+            "id": 116,
+            "text": "Mi shipeo preferido es el de ____ con ____.",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 2
+        },
+        {
+            "id": 117,
+            "text": "Quiero un trío con ____ y ____.",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 2
+        },
+        {
+            "id": 118,
+            "text": "Me mato antes de estar con ____.",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        },
+        {
+            "id": 119,
+            "text": "En que está pensando Martu ahora?",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        },
+        {
+            "id": 120,
+            "text": "Yo me shipeo con ____.",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        },
+        {
+            "id": 121,
+            "text": "Mi última búsqueda de Google es ____.",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        },
+        {
+            "id": 122,
+            "text": "Estaba viendo cosas que no debía en mi celular y me atrapó ____.",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        },
+        {
+            "id": 123,
+            "text": "La verdad una paja ____ pero igual estoy para esa.",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        },
+        {
+            "id": 124,
+            "text": "",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        },
+        {
+            "id": 125,
+            "text": "",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        },
+        {
+            "id": 126,
+            "text": "",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        },
+        {
+            "id": 127,
+            "text": "",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        },
+        {
+            "id": 128,
+            "text": "",
+            "color": "Black",
+            "extension": "Jave",
+            "pick": 1
+        },
+        {
+            "id": 129,
+            "text": "",
             "color": "Black",
             "extension": "Jave",
             "pick": 1
