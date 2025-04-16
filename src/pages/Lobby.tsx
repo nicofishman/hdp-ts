@@ -55,7 +55,7 @@ const Lobby: FC<LobbyProps> = () => {
                         }
                     });
                 } else {
-                    if (data.isStarted) {
+                    if (data.state === 'playing') {
                         navigate(`/game/${id}`);
                     }
                 }
@@ -128,6 +128,11 @@ const Lobby: FC<LobbyProps> = () => {
         setGame({ ...game, lang });
     };
 
+    const handlePointsToWinChange = (points: number) => {
+        Firestore.updateGamePointsToWin(game.id, points);
+        setGame({ ...game, pointsToWin: points });
+    };
+
     return game.id ? (
         <div className="relative mx-[10%] flex h-screen w-full min-w-[215px] flex-col items-center justify-center gap-8 sm:mx-[17%] md:mx-[15%] lg:mx-[25%] xl:mx-[35%]">
             <PlayersCard
@@ -138,21 +143,40 @@ const Lobby: FC<LobbyProps> = () => {
             />
             {game.owner === user.uid && (
                 <>
-                    <Select
-                        mainOption={'Card Set'}
-                        options={Object.entries(cardSets).map(
-                            ([key, value]) => {
-                                return {
-                                    text: value,
-                                    value: key,
-                                    selected: game.lang === key
-                                };
+                    <div className="flex h-28 w-full flex-col gap-4 md:h-14 md:flex-row [&>*]:flex-1">
+                        <Select
+                            className="h-14"
+                            mainOption={'Card Set'}
+                            options={Object.entries(cardSets).map(
+                                ([key, value]) => {
+                                    return {
+                                        text: value,
+                                        value: key,
+                                        selected: game.lang === key
+                                    };
+                                }
+                            )}
+                            onChange={(value) =>
+                                handleLanguageChange(value as CardSet)
                             }
-                        )}
-                        onChange={(value) =>
-                            handleLanguageChange(value as CardSet)
-                        }
-                    />
+                        />
+                        <div className="w-full place-self-end">
+                            <label className="font-main text-base">
+                                {t('pointsToWin')}
+                            </label>
+                            <Input
+                                className="h-10"
+                                min={1}
+                                type="number"
+                                value={game.pointsToWin}
+                                onChange={(e) =>
+                                    handlePointsToWinChange(
+                                        parseInt(e.target.value)
+                                    )
+                                }
+                            />
+                        </div>
+                    </div>
                     <Button
                         className="h-10 w-1/2 min-w-[160px] text-lg"
                         text={t('startgame')}
@@ -161,7 +185,7 @@ const Lobby: FC<LobbyProps> = () => {
                 </>
             )}
             <div className="absolute bottom-5 flex w-full min-w-[160px] flex-col gap-4 md:flex-row">
-                <div className="relative flex h-full min-h-[40px] flex-1 flex-col gap-y-0.5 place-self-end">
+                <div className="relative flex h-full min-h-[40px] w-full flex-1 flex-col gap-y-0.5 place-self-end">
                     <label className="absolute -top-6 font-main text-base">
                         {t('username')}
                     </label>

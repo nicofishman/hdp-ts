@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import React, { FC, useEffect } from 'react';
+import { isMobile } from 'react-device-detect';
 
 import { useAuthContext } from '../../context/AuthContext';
 import { useDragAndDropContext } from '../../context/DragAndDropContext';
@@ -21,11 +22,15 @@ const BottomContainer: FC<BottomContainersProps> = ({ cards, lang }) => {
         droppedCards,
         hdpSentCards,
         setHdpSentCards,
-        hdpDroppedCards
+        hdpDroppedCards,
+        addCardToDroppedCards,
+        addCardsToHdpDroppedCards
     } = useDragAndDropContext();
 
     const { game } = useGameContext();
     const { user } = useAuthContext();
+
+    const canSelectCards = currentPick !== droppedCards.length;
 
     const isHDP = game.players.filter((p) => p.id === user.uid)[0].isHdp;
 
@@ -54,11 +59,14 @@ const BottomContainer: FC<BottomContainersProps> = ({ cards, lang }) => {
                               {!droppedCards.includes(cardId) && (
                                   <Card
                                       bgColor={myCard.color}
-                                      draggable={
-                                          !(currentPick === droppedCards.length)
-                                      }
+                                      draggable={canSelectCards && !isMobile}
                                       id={myCard.id}
                                       text={myCard.text}
+                                      onClick={() => {
+                                          if (isMobile && canSelectCards) {
+                                              addCardToDroppedCards(cardId);
+                                          }
+                                      }}
                                   />
                               )}
                           </div>
@@ -77,6 +85,19 @@ const BottomContainer: FC<BottomContainersProps> = ({ cards, lang }) => {
                                   id={getCardById(c.cards[0], lang).id}
                                   playerId={c.playerId}
                                   text={getCardById(c.cards[0], lang).text}
+                                  onClick={() => {
+                                      if (
+                                          isMobile &&
+                                          hdpDroppedCards.length === 0
+                                      ) {
+                                          addCardsToHdpDroppedCards([
+                                              {
+                                                  playerId: c.playerId,
+                                                  cards: [c.cards[0]]
+                                              }
+                                          ]);
+                                      }
+                                  }}
                               />
                           ) : (
                               <StackedCards

@@ -9,6 +9,7 @@ import mono from '../public/img/Mono.png';
 import { getCardById } from '../utils/game';
 import { Card as CardType } from '../types/game';
 import { CardSet } from '../lang/cardSets';
+import { cn } from '../utils/cn';
 
 import DraggableCard from './Game/DraggableCard';
 
@@ -78,7 +79,7 @@ const Card: FC<CardProps> = ({
     return (
         <div
             ref={setNodeRef}
-            className={clsx(
+            className={cn(
                 'shadow-my-card relative mr-0.5 mb-0.5 h-60 w-40 min-w-[160px] select-none break-words rounded-md border-[1px] border-black p-2 text-center transition-transform duration-200',
                 bgColor === 'white'
                     ? 'bg-white text-black'

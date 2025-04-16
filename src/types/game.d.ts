@@ -10,7 +10,7 @@ export interface Player {
 
 export interface Game {
     id: string;
-    isStarted: boolean;
+    state: 'waiting' | 'playing' | 'finished';
     currentRound: number;
     lang: CardSet;
     owner: string;
@@ -20,6 +20,7 @@ export interface Game {
     usedCards: number[];
     usedBlackCards: number[];
     currentBlackCard: number | null;
+    pointsToWin: number;
 }
 
 export interface Card {

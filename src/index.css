@@ -5,13 +5,13 @@
 @tailwind utilities;
 
 .shadow-my-card {
-    @apply shadow-theme-card dark:shadow-dark-card
+    @apply shadow-theme-card dark:shadow-dark-card;
 }
 
 .bg-main {
-    @apply bg-white dark:bg-negrito dark:text-gray-200 fill-black dark:fill-gray-200
+    @apply bg-white dark:bg-negrito dark:text-gray-200 fill-black dark:fill-gray-200;
 }
 
 .main-card {
-    @apply min-h-fit bg-main font-main font-medium rounded-md shadow-my-card border-[1px] border-black dark:border-[#666]
+    @apply bg-main font-main font-medium rounded-md shadow-my-card border-[1px] border-black dark:border-[#666];
 }

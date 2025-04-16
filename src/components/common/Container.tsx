@@ -1,13 +1,14 @@
-import clsx from 'clsx';
 import React, { FC, HTMLAttributes, ReactNode } from 'react';
+
+import { cn } from '../../utils/cn';
 
 interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
     children?: ReactNode;
-};
+}
 
 const Container: FC<ContainerProps> = ({ children, className, ...props }) => {
     return (
-        <div className={clsx('main-card min-h-full w-full', className)} {...props}>
+        <div className={cn('main-card w-full', className)} {...props}>
             {children}
         </div>
     );

@@ -42,5 +42,6 @@
     "usernameError": "Ingresá un nombre de usuario",
     "usernameChanged": "Nombre de usuario cambiado con éxito",
     "userInRoomMissingDisplayName": "Hay un usuario sin nombre de usuario",
-    "anonymous": "Anónimo"
+    "anonymous": "Anónimo",
+    "pointsToWin": "Puntos para ganar"
 }

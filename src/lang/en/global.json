@@ -41,5 +41,6 @@
     "usernameError": "Please enter a username",
     "usernameChanged": "Username changed successfully",
     "userInRoomMissingDisplayName": "There is a user without a username",
-    "anonymous": "Anonymous"
+    "anonymous": "Anonymous",
+    "pointsToWin": "Points to win"
 }

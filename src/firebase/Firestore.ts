@@ -116,7 +116,9 @@ export class Firestore {
             usedBlackCards: [],
             currentBlackCard: null,
             lang: cardSet,
-            shortCode
+            pointsToWin: 5,
+            shortCode,
+            state: 'waiting' as Game['state']
         };
 
         await setDoc(newGameRef, { id: newGameRef.id, ...newGameData }).then(
@@ -131,6 +133,14 @@ export class Firestore {
 
         await updateDoc(gameRef, {
             lang: cardSet
+        });
+    };
+
+    static updateGamePointsToWin = async (gameId: string, points: number) => {
+        const gameRef = doc(Firestore.gamesRef, gameId);
+
+        await updateDoc(gameRef, {
+            pointsToWin: points
         });
     };
 
@@ -202,7 +212,7 @@ export class Firestore {
             return;
         }
 
-        if (game.isStarted) {
+        if (game.state === 'playing' || game.state === 'finished') {
             toast(t('gamestarted'), {
                 type: 'error',
                 containerId: 'A',
@@ -257,8 +267,7 @@ export class Firestore {
             1
         )[0];
 
-        // TODO: usedBlackCards tiene que ser leido
-        const usedBlackCards: number[] = gameData.usedBlackCards;
+        const usedBlackCards = gameData.usedBlackCards;
 
         usedBlackCards.push(currentBlackCard);
 
@@ -281,7 +290,7 @@ export class Firestore {
         await updateDoc(gameRef, {
             players: newPlayers,
             currentBlackCard,
-            isStarted: true,
+            state: 'playing',
             usedCards,
             usedBlackCards
         });
@@ -405,15 +414,26 @@ export class Firestore {
             1
         )[0];
 
+        gameData.usedBlackCards.push(newCurrentBlackCard);
+
         const currentRound = gameData.currentRound + 1;
 
         await updateDoc(gameRef, {
             players: newPlayers,
             currentRound,
             usedCards,
+            usedBlackCards: gameData.usedBlackCards,
             currentBlackCard: newCurrentBlackCard,
             sentCards: []
         });
+
+        for (const players of newPlayers) {
+            if (players.points >= gameData.pointsToWin) {
+                await updateDoc(gameRef, {
+                    state: 'finished'
+                });
+            }
+        }
     };
 
     static deleteGame = async (gameId: string) => {
