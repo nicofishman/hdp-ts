@@ -43,5 +43,6 @@
     "usernameChanged": "Nombre de usuario cambiado con éxito",
     "userInRoomMissingDisplayName": "Hay un usuario sin nombre de usuario",
     "anonymous": "Anónimo",
-    "pointsToWin": "Puntos para ganar"
+    "pointsToWin": "Puntos para ganar",
+    "results": "Resultados"
 }

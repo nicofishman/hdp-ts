@@ -47,6 +47,10 @@ const Game: FC<GameProps> = () => {
                     navigate(`/lobby/${id}`);
                 }
 
+                if (data.state === 'finished') {
+                    navigate(`/results/${id}`);
+                }
+
                 if (!data.players.map((p: Player) => p.id).includes(user.uid)) {
                     toast(t('playernotingame'), {
                         type: 'error',
