@@ -64,7 +64,9 @@ const PlayersCard: FC<PlayersCardProps> = ({
                             </span>
                         )}
                         {p.id === gameOwner && !points && (
-                            <span className="font-main text-2xl">👑</span>
+                            <span className="font-main text-2xl drop-shadow-lg">
+                                👑
+                            </span>
                         )}
                         {gameOwner === userId &&
                             gameOwner !== p.id &&

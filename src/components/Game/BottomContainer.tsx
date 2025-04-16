@@ -102,9 +102,19 @@ const BottomContainer: FC<BottomContainersProps> = ({ cards, lang }) => {
                           ) : (
                               <StackedCards
                                   cards={c.cards}
-                                  draggable={hdpDroppedCards.length === 0}
+                                  draggable={
+                                      hdpDroppedCards.length === 0 && !isMobile
+                                  }
                                   lang={lang}
                                   playerId={c.playerId}
+                                  onClick={() => {
+                                      if (
+                                          isMobile &&
+                                          hdpDroppedCards.length === 0
+                                      ) {
+                                          addCardsToHdpDroppedCards([c]);
+                                      }
+                                  }}
                               />
                           )}
                       </div>

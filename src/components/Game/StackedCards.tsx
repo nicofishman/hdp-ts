@@ -14,13 +14,15 @@ interface StackedCardsProps {
     lang: CardSet;
     draggable: boolean;
     playerId: string;
+    onClick?: () => void;
 }
 
 const StackedCards: FC<StackedCardsProps> = ({
     cards,
     lang,
     draggable,
-    playerId
+    playerId,
+    onClick
 }) => {
     const stackId = createHashFromToCards(cards);
     const myCards = cards.map((cardId) => getCardById(cardId, lang));
@@ -35,6 +37,7 @@ const StackedCards: FC<StackedCardsProps> = ({
                     !isMobile &&
                     'cursor-grab hover:translate-y-[-0.8em]'
             )}
+            onClick={onClick}
         >
             {!draggedCards?.includes(cards[0]) ? (
                 cards.map((cardId: number, idx: number) => {

@@ -334,11 +334,11 @@ export class Firestore {
         const newPlayers: Player[] = [];
         const cardsUsed = [...usedCards];
 
-        players.forEach((player) => {
+        for (const player of players) {
             const newCards = shuffleCards(
                 lang,
                 'White',
-                usedCards,
+                cardsUsed,
                 WHITE_CARDS_PER_PLAYER - player.cards.length
             );
 
@@ -347,7 +347,7 @@ export class Firestore {
                 cards: [...player.cards, ...newCards]
             });
             cardsUsed.push(...newCards);
-        });
+        }
 
         return {
             newPlayers,
